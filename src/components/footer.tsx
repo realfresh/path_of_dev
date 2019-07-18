@@ -38,7 +38,7 @@ export const Footer = () => (
   <FooterComponent>
     <div className="content">
       <div className="copyright">path_of_dev © {new Date().getFullYear()}</div>
-      <a className="github" href="https://github.com" target="_blank">
+      <a className="github" href="https://github.com/realfresh/path_of_dev" target="_blank">
         <span className="text">See site code on GitHub</span>
         <FaGithub className="icon"/>
       </a>

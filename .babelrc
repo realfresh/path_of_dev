@@ -1,0 +1,21 @@
+{
+  "plugins": [
+    "@babel/plugin-proposal-optional-chaining",
+    ["prismjs", {
+      "languages": ["javascript", "css", "jsx", "bash", "json"],
+      "plugins": ["line-numbers", "show-language"],
+      "theme": "okaidia",
+      "css": true
+    }]
+  ],
+  "presets": [
+    [
+      "babel-preset-gatsby",
+      {
+        "targets": {
+          "browsers": [">0.25%", "not dead"]
+        }
+      }
+    ]
+  ]
+}

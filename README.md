@@ -2,13 +2,13 @@
 This repo contains the source code for my blog https://pathof.dev
 
 ## Built with
-The project makes use of Gatbsty JS as a static site generator and prismic.io as a headless CMS. Together, this blog site is statically generated and hosted on Netlify
+The project makes use of https://www.gatsbyjs.org as a static site generator and https://prismic.io as a headless CMS. When used together, a static blog site like this can be created. It can also be hosted on static hosting like https://www.netlify.com
 
 ## How can I use this source to create my own blog?
 
 ### Prerequisites
 - https://nodejs.org - installed on your PC
-- https://prismic.io/ - create a repository with a content type called `Blog` with an API id of `blog` and get your API key for it
+- https://prismic.io - create a repository with a content type called `Blog` with an API id of `blog` and get your API key for it
 
 ### Process
 1. Clone this repo to your PC or fork it if you like

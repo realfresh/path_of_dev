@@ -7,8 +7,9 @@ The project makes use of https://www.gatsbyjs.org as a static site generator and
 ## How can I use this source to create my own blog?
 
 ### Prerequisites
-- https://nodejs.org - installed on your PC
-- https://prismic.io - create a repository with a content type called `Blog` with an API id of `blog` and get your API key for it
+- Familiarity with https://www.typescriptlang.org as all the code is TypeScript
+- https://nodejs.org, installed on your PC
+- https://prismic.io, create a repository with a content type called `Blog` and with an API id of `blog`
 
 ### Process
 1. Clone this repo to your PC or fork it if you like

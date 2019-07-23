@@ -9,19 +9,14 @@ import {boxStyles} from "../components/box"
 
 interface Props extends PageRendererProps {
   data: {
-    allPrismicBlog: {
+    allMarkdownRemark: {
       edges: Array<{
         node: {
-          id: string
-          uid: string
-          first_publication_date: string
-          data: {
-            title: {
-              text: string
-            }
-            description: {
-              text: string
-            }
+          frontmatter: {
+            date: string
+            path: string
+            title: string
+            description: string
           }
         }
       }>
@@ -60,24 +55,24 @@ export default (props: Props) => (
     </SEO>
     <h1 className="lhp">Latest Posts</h1>
     <Posts>
-      {props.data.allPrismicBlog.edges.map(({ node }) => (
-        <li key={node.id}>
-          <Link className="post" to={`/blog/${node.uid}`}>
-            <h2 className="title">{node.data.title.text}</h2>
+      {props.data.allMarkdownRemark.edges.map(({ node }, i) => (
+        <li key={i}>
+          <Link className="post" to={node.frontmatter.path}>
+            <h2 className="title">{node.frontmatter.title}</h2>
             <p className="date">
-              {new Date(node.first_publication_date).toLocaleDateString()}
+              {node.frontmatter.date}
               {` - `}
               <Disqus.CommentCount
                 shortname={"path_of_dev"}
                 config={{
-                  url: `https://pathof.dev/blog/${node.uid}`,
-                  identifier: node.id,
-                  title: node.data.title.text,
+                  url: `https://pathof.dev/${node.frontmatter.path}`,
+                  identifier: node.frontmatter.path,
+                  title: node.frontmatter.title,
                 }}>
                 0 Comments
               </Disqus.CommentCount>
             </p>
-            <p className="description">{node.data.description.text}</p>
+            <p className="description">{node.frontmatter.description}</p>
           </Link>
         </li>
       ))}
@@ -87,19 +82,14 @@ export default (props: Props) => (
 
 export const query = graphql`
   query PageQuery {
-      allPrismicBlog(sort: {fields: first_publication_date, order: DESC}) {
+      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000 ) {
           edges {
               node {
-                  id
-                  uid
-                  first_publication_date
-                  data {
-                      title {
-                          text
-                      }
-                      description {
-                          text
-                      }
+                  frontmatter {
+                      date(formatString: "MMMM DD, YYYY")
+                      path
+                      title
+                      description
                   }
               }
           }

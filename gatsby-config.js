@@ -1,8 +1,3 @@
-const he = require('he');
-const seoUrl = require("./src/utilities/seo-url");
-const PrismicDOM = require('prismic-dom');
-const Elements = PrismicDOM.RichText.Elements;
-
 // IN PRODUCTION, ENV VARIABLES INCLUDED FROM NETLIFY
 if (process.env.NODE_ENV === "development") {
   require("dotenv").config({
@@ -26,61 +21,16 @@ module.exports = {
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-prismic`,
+      resolve: `gatsby-source-filesystem`,
       options: {
-        repositoryName: process.env.PRISMIC_REPOSITORY_NAME,
-        accessToken: process.env.PRISMIC_API_KEY,
-        linkResolver: ({ node, key, value }) => post => `/blog/${post.uid}`,
-        htmlSerializer: ({ node, key, value }) => (
-          type,
-          element,
-          content,
-          children,
-        ) => {
+        name: `markdown-pages`,
+        path: `${__dirname}/src/posts`,
+      },
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
 
-          if (type === Elements.heading2) {
-            const text = children.join('')
-            return `<h2 id="${seoUrl(text)}"><a href="#${seoUrl(text)}">${text}</a></h2>`
-          }
-          if (type === Elements.heading3) {
-            const text = children.join('')
-            return `<h3 id="${seoUrl(text)}"><a href="#${seoUrl(text)}">${text}</a></h3>`
-          }
-          if (type === Elements.heading4) {
-            const text = children.join('')
-            return `<h4 id="${seoUrl(text)}"><a href="#${seoUrl(text)}">${text}</a></h4>`
-          }
-
-          if (type === Elements.embed) {
-            return (`
-              <div class="embed" data-oembed="${element.oembed.embed_url}" data-oembed-type="${element.oembed.type}" data-oembed-provider="${element.oembed.provider_name}">
-                ${element.oembed.html}
-              </div>
-            `);
-          }
-
-          if (type === Elements.image) {
-            return `<img class="post-image" src="${element.url}" alt="${element.alt === null ? '' : element.alt}">`;
-          }
-
-          if (type === Elements.preformatted) {
-            let string = "";
-            for (const c of children) {
-              if (c.indexOf("-----") !== -1) {
-                const tmp = c.split("-----")
-                string += he.unescape(tmp[1]);
-              }
-              else {
-                string += c;
-              }
-            }
-            return string;
-          }
-
-          // RETURN DEFAULT VALUE
-          return null;
-
-        },
       },
     },
     {

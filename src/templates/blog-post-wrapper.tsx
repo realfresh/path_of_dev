@@ -15,7 +15,7 @@ export const BlogPostWrapper = styled.article`
     margin-top: 30px;
   }
   
-  .post {
+  .post > div {
   
     display: flex;
     flex-direction: column;

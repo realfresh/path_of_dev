@@ -1,10 +1,11 @@
 import React from "react"
 import Prism from "prismjs"
 import Disqus from "disqus-react"
+import RehypeReact from "rehype-react"
+import ImageZoom from "react-medium-image-zoom"
 import {graphql, Link, PageRendererProps} from "gatsby"
 import {Layout} from "../components/layout"
 import {SEO} from "../components/seo"
-import {ModalImage} from "../components/modal-image"
 import {LinksList} from "../components/links-list"
 import {Divider} from "../components/divider"
 import {BlogPostWrapper} from "./blog-post-wrapper"
@@ -16,39 +17,70 @@ Prism.hooks.add("before-highlight", (env: any) => {
   env.code = env.element.innerText
 })
 
-const headingElements = ["heading2", "heading3", "heading4"]
+const renderMarkdown = new RehypeReact({
+  createElement: React.createElement,
+  components: {
+    h2: ({ children }) => {
+      const title = children[0]
+      const id = `${seoUrl(title)}`
+      return <h2 id={id}><a href={`#${id}`}>{title}</a></h2>
+    },
+    h3: ({ children }) => {
+      const title = children[0]
+      const id = `${seoUrl(title)}`
+      return <h3 id={id}><a href={`#${id}`}>{title}</a></h3>
+    },
+    h4: ({ children }) => {
+      const title = children[0]
+      const id = `${seoUrl(title)}`
+      return <h4 id={id}><a href={`#${id}`}>{title}</a></h4>
+    },
+    youtube: ({ children }) => {
+      return (
+        <iframe
+          width="100%"
+          height="360"
+          src={children[0]}
+        />
+      )
+    },
+    img: (props) => {
+      return (
+        <ImageZoom
+          shouldRespectMaxDimension={true}
+          image={{
+            src: props.src,
+            alt: props.alt || "",
+          }}
+        />
+      )
+    }
+  },
+}).Compiler
 
 interface Props extends PageRendererProps {
   data: {
-    allPrismicBlog: {
+    markdownRemark: {
+      htmlAst: string
+      headings: Array<{ depth: number, value: string }>
+      frontmatter: {
+        date: string
+        path: string
+        title: string
+        description: string
+      }
+    }
+    allMarkdownRemark: {
       edges: Array<{
         node: {
-          id: string
-          uid: string
-          data: {
-            title: {
-              text: string
-            }
+          frontmatter: {
+            path: string
+            title: string
+            description: string
+            date: string
           }
         }
       }>
-    }
-    prismicBlog: {
-      id: string
-      uid: string
-      first_publication_date: string
-      data: {
-        title: {
-          text: string
-        }
-        content: {
-          html: string
-          raw: Array<{ text: string, type: string }>
-        }
-        description: {
-          text: string
-        }
-      }
     }
   }
 }
@@ -73,29 +105,30 @@ export default class BlogPostTemplate extends React.Component<Props> {
 
   render() {
     const { data, location } = this.props
+    const post = data.markdownRemark
     const disqusShortname = process.env.DISQUS_SHORTNAME!
     const disqusConfig = {
       url: location.href,
-      identifier: data.prismicBlog.id,
-      title: data.prismicBlog.data.title.text,
+      identifier: post.frontmatter.path, // post.frontmatter.path.split("/blog/")[1],
+      title: post.frontmatter.title,
     }
     return (
       <Layout>
 
         <SEO
-          title={data.prismicBlog.data.title.text}
-          description={data.prismicBlog.data.description.text}>
-          <link rel="canonical" href={`https://pathof.dev/blog/${data.prismicBlog.uid}`}/>
+          title={post.frontmatter.title}
+          description={post.frontmatter.description}>
+          <link rel="canonical" href={`https://pathof.dev/${post.frontmatter.path}`}/>
         </SEO>
 
         <BlogPostWrapper>
 
           <header>
-            <h1 className="lhp">{data.prismicBlog.data.title.text}</h1>
+            <h1 className="lhp">{post.frontmatter.title}</h1>
             <p className="details">
               Published:{` `}
-              <time dateTime={data.prismicBlog.first_publication_date}>
-                {new Date(data.prismicBlog.first_publication_date).toLocaleDateString()}
+              <time dateTime={post.frontmatter.date}>
+                {post.frontmatter.date}
               </time>
               {` - `}
               <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
@@ -107,30 +140,25 @@ export default class BlogPostTemplate extends React.Component<Props> {
           <LinksList
             className="toc"
             links={(() => {
-              const toc = data.prismicBlog.data.content.raw.filter(({ type }) => headingElements.indexOf(type) !== -1)
-              return toc.map(({ type, text }) => {
-                const depth = parseInt(type.split("heading")[1], 10)
-                const link = `#${seoUrl(text)}`
-                return { depth, text, link, internal: false }
+              return post.headings.map(({ value, depth }) => {
+                const link = `#${seoUrl(value)}`
+                return { depth, link, text: value, internal: false }
               })
             })()}
           />
 
-          <div
-            className="post"
-            dangerouslySetInnerHTML={{
-              __html: data.prismicBlog.data.content.html
-            }}
-          />
+          <div className="post">
+            {renderMarkdown(post.htmlAst)}
+          </div>
 
           <Divider/>
 
           <section className="recommend-articles">
             <p className="title">Latest Posts</p>
             <LinksList
-              links={data.allPrismicBlog.edges.map(({node}) => ({
-                text: node.data.title.text,
-                link: `/blog/${node.uid}`,
+              links={data.allMarkdownRemark.edges.map(({node}) => ({
+                text: node.frontmatter.title,
+                link: node.frontmatter.path,
                 depth: 1,
                 internal: true,
               }))}
@@ -148,8 +176,6 @@ export default class BlogPostTemplate extends React.Component<Props> {
 
         </BlogPostWrapper>
 
-        <ModalImage/>
-
       </Layout>
     )
   }
@@ -157,39 +183,32 @@ export default class BlogPostTemplate extends React.Component<Props> {
 }
 
 export const pageQuery = graphql`
-  query PostBySlug($uid: String!) {
+  query($path: String!) {
 
-      allPrismicBlog(sort: {fields: first_publication_date, order: DESC}, limit: 5, filter: {uid: { ne: $uid } }) {
-          edges {
-              node {
-                  id
-                  uid
-                  data {
-                      title {
-                          text
-                      }
-                  }
-              }
+      markdownRemark(frontmatter: { path: { eq: $path } }) {
+          htmlAst
+          headings {
+              depth
+              value
+          }
+          frontmatter {
+              date(formatString: "MMMM DD, YYYY")
+              path
+              title
+              description
+              
           }
       }
-      
-      prismicBlog(uid: { eq: $uid }) {
-          id
-          uid
-          first_publication_date
-          data {
-              title {
-                  text
-              }
-              content {
-                  html
-                  raw {
-                      text
-                      type
+
+      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { path: { ne: $path }}}, limit: 5) {
+          edges {
+              node {
+                  frontmatter {
+                      path
+                      title
+                      description
+                      date(formatString: "MMMM DD, YYYY")
                   }
-              }
-              description {
-                  text
               }
           }
       }

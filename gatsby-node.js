@@ -6,6 +6,15 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const pages = await graphql(`
     {
+      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000 ) {
+        edges {
+          node {
+            frontmatter {
+              path
+            }
+          }
+        }
+      }
       allPrismicBlog {
         edges {
           node {
@@ -19,13 +28,11 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const template = path.resolve("src/templates/blog-post.tsx")
 
-  pages.data.allPrismicBlog.edges.forEach(edge => {
+  pages.data.allMarkdownRemark.edges.forEach(({ node }) => {
     createPage({
-      path: `/blog/${edge.node.uid}`,
+      path: node.frontmatter.path,
       component: template,
-      context: {
-        uid: edge.node.uid,
-      },
+      context: {},
     })
   })
 

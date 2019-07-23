@@ -15,14 +15,6 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      allPrismicBlog {
-        edges {
-          node {
-            id
-            uid
-          }
-        }
-      }
     }
   `)
 

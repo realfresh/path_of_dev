@@ -263,7 +263,7 @@ In this tutorial, we will do the following:
 
 ### Install Git onto your PC
 
-You can find the official instructions for [installing git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.).
+You can find the official instructions for [installing Git here](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git.).
 
 Follow the instructions for your operating system. If something in the installer confuses you, just use the default settings and proceed.
 
@@ -292,7 +292,7 @@ git init
 # Initialized empty Git repository in /home/user/git-test
 ```
 
-Once done, you have officially created a local git repo (local as in on your PC). Everything you add, remove or modify within this folder can be tracked.
+Once done, you have officially created a local Git repo (local as in on your PC). Everything you add, remove or modify within this folder can be tracked.
 
 ### Create a commit (save point)
 

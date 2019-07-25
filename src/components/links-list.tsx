@@ -28,14 +28,21 @@ const Wrapper = styled.nav`
     a {
       text-decoration: underline;
       color: ${theme.primary};
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       line-height: 1.4;
     }
     &:last-child { 
       margin-bottom: 0 
     }
     &.depth-2 { margin-left: 0; }
-    &.depth-3 { margin-left: 10px; }
+    &.depth-3 { 
+      margin-left: 10px; 
+      list-style: circle;
+      a {
+        // text-decoration: none;
+        font-size: 0.9rem; 
+      }
+    }
     &.depth-4 { margin-left: 20px; }
   }
 `

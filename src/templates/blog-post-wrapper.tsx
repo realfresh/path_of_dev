@@ -23,19 +23,10 @@ export const BlogPostWrapper = styled.article`
     padding-bottom: 60px;
     
     > * {
-      margin-top: 20px;
+      margin-top: 25px;
       &:first-child {
         margin-top: 0;
       }
-    }
-    
-    h2 {
-      margin-top: 50px;
-      margin-bottom: 10px;
-    }
-    
-    h3, h4 {
-      margin-top: 40px;
     }
     
     h2, h3, h4 {
@@ -51,8 +42,27 @@ export const BlogPostWrapper = styled.article`
       }
     }
     
+    h2 {
+      margin-top: 50px;
+      margin-bottom: 10px;
+    }
+    
+    h3, h4 {
+      margin-top: 40px;
+      padding: 8px 12px;
+      min-width: 104%;
+    }
+    
     p {
-      line-height: 1.6;
+      line-height: 1.7;
+    }
+    
+    p, li {
+      > code {
+        background: rgba(47,208,35,0.15);
+        padding: 3px 5px;
+        font-size: 0.85rem;
+      }
     }
     
     strong {
@@ -63,7 +73,8 @@ export const BlogPostWrapper = styled.article`
     
     img {
       width: auto;
-      max-width: 106%;
+      // max-width: 106%;
+      max-width: 100%;
       align-self: center;
       cursor: pointer;
       transition: 0.3s;
@@ -73,10 +84,10 @@ export const BlogPostWrapper = styled.article`
     }
     
     ul {
-      padding: 0 15px;
+      padding: 0 0 0 25px;
       list-style: disc;
       li {
-        line-height: 1.4;
+        line-height: 1.7;
         margin-bottom: 8px;
         &:last-child { 
           margin-bottom: 0 
@@ -90,6 +101,28 @@ export const BlogPostWrapper = styled.article`
       }
     }
     
+    
+    table {
+      width: 100%;
+      overflow: auto;
+      display: block;
+      border-spacing: 0;
+      border-collapse: collapse;
+      tr {
+        border-top: 1px solid #ccc;
+        background-color: #fff;
+        text-align: left;
+      }
+      tr:nth-child(2n) {
+        background-color: #f8f8f8;
+      }
+      th, td {
+        border: 1px solid #ddd;
+        padding: 8px 13px;
+        font-size: 0.9rem;
+        line-height: 1.2rem;
+      }
+    }
   }
   
   .recommend-articles {

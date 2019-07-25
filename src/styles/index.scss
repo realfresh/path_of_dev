@@ -6,7 +6,7 @@ $text-color: #292929;
 
 // BASE
 html {
-  font-family: Helvetica, sans-serif;
+  font-family: 'Roboto Slab', serif;
   font-size: 16px;
   color: $text-color;
 }
@@ -58,4 +58,10 @@ a {
 
 pre[class*="language-"] {
   margin: 0 !important;
+}
+
+
+code[class*="language-"], pre[class*="language-"] {
+  font-family: monospace !important;
+  font-size: 0.9rem !important;
 }

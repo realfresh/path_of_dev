@@ -38,10 +38,12 @@ const Posts = styled.ul`
       line-height: 1.4rem;
       font-weight: 600;
     }
-    .date {
+    .details {
+      margin-top: 2px;
       font-size: 0.8rem;
     }
     .description {
+      margin-top: 5px;
       font-size: 0.9rem;
       line-height: 1.4rem;
     }
@@ -59,7 +61,7 @@ export default (props: Props) => (
         <li key={i}>
           <Link className="post" to={node.frontmatter.path}>
             <h2 className="title">{node.frontmatter.title}</h2>
-            <p className="date">
+            <p className="details">
               {node.frontmatter.date}
               {` - `}
               <Disqus.CommentCount

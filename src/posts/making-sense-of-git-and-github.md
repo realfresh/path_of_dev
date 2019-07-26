@@ -17,7 +17,7 @@ The purpose of this article is to take you from feeling confused to having a pra
 
 I believe the **best way to learn something is to first understand its purpose and the surrounding context**. Let's start with that before we get into how to use these tools.
 
-## What is Git & what it's purpose?
+## What is Git & what is its purpose?
 
 Git, according to the Wikipedia definition, "is a distributed version-control system for tracking changes in source code during software development".
 Let me break down exactly what this means and why it’s important. First, let’s establish the obvious...

@@ -137,15 +137,19 @@ export default class BlogPostTemplate extends React.Component<Props> {
             </p>
           </header>
 
-          <LinksList
-            className="toc"
-            links={(() => {
-              return post.headings.map(({ value, depth }) => {
-                const link = `#${seoUrl(value)}`
-                return { depth, link, text: value, internal: false }
-              })
-            })()}
-          />
+          {post.headings.length > 0 && (
+            <div className="toc">
+              <p className="title">Contents</p>
+              <LinksList
+                links={(() => {
+                  return post.headings.map(({ value, depth }) => {
+                    const link = `#${seoUrl(value)}`
+                    return { depth, link, text: value, internal: false }
+                  })
+                })()}
+              />
+            </div>
+          )}
 
           <div className="post">
             {renderMarkdown(post.htmlAst)}

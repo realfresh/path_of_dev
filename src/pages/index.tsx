@@ -17,6 +17,7 @@ interface Props extends PageRendererProps {
             path: string
             title: string
             description: string
+            preview: string
           }
         }
       }>
@@ -57,7 +58,7 @@ export default (props: Props) => (
     </SEO>
     <h1 className="lhp">Latest Posts</h1>
     <Posts>
-      {props.data.allMarkdownRemark.edges.map(({ node }, i) => (
+      {props.data.allMarkdownRemark.edges.map(({ node }, i) => node.frontmatter.preview === "true" ? null : (
         <li key={i}>
           <Link className="post" to={node.frontmatter.path}>
             <h2 className="title">{node.frontmatter.title}</h2>
@@ -92,6 +93,7 @@ export const query = graphql`
                       path
                       title
                       description
+                      preview
                   }
               }
           }

@@ -26,20 +26,22 @@ const Wrapper = styled.nav`
     cursor: pointer;
     margin-bottom: 8px;   
     a {
-      text-decoration: underline;
-      color: ${theme.primary};
+      text-decoration: none;
+      color: ${theme.text};
       font-size: 0.95rem;
       line-height: 1.4;
     }
     &:last-child { 
       margin-bottom: 0 
     }
-    &.depth-2 { margin-left: 0; }
+    &.depth-2 { 
+      margin-left: 0;
+    }
     &.depth-3 { 
       margin-left: 10px; 
       list-style: circle;
       a {
-        // text-decoration: none;
+        text-decoration: none;
         font-size: 0.9rem; 
       }
     }

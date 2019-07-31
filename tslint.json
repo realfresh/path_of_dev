@@ -18,7 +18,8 @@
     "no-empty": false,
     "no-misleading-array-reverse": false,
     "curly": false,
-    "no-identical-functions": false
+    "no-identical-functions": false,
+    "no-empty-interface": false
   },
   "rulesDirectory": []
 }

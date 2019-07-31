@@ -13,6 +13,12 @@ export const BlogPostWrapper = styled.article`
   
   .toc {
     margin-top: 30px;
+    .title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
   }
   
   .post > div {

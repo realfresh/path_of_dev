@@ -11,6 +11,7 @@ exports.createPages = async ({ graphql, actions }) => {
           node {
             frontmatter {
               path
+              preview
             }
           }
         }
@@ -21,11 +22,16 @@ exports.createPages = async ({ graphql, actions }) => {
   const template = path.resolve("src/templates/blog-post.tsx")
 
   pages.data.allMarkdownRemark.edges.forEach(({ node }) => {
-    createPage({
-      path: node.frontmatter.path,
-      component: template,
-      context: {},
-    })
+    if (node.frontmatter.preview !== "true") {
+      createPage({
+        path: node.frontmatter.path,
+        component: template,
+        context: {},
+      })
+    }
+    else {
+      console.log("PREVIEW", node);
+    }
   })
 
 }

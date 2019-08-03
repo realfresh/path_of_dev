@@ -1,0 +1,65 @@
+
+
+Creating a new user in the system is a simple process. There are 3 unique identifiers that a user account can be created with. They are:
+
+- Username
+- E-mail
+- Password
+
+### Creating an account with a single identifier
+
+A user account can be created with just one identifier or all 3. To create a new user account, we simply need to do the following.
+
+```js
+await auth.register({
+  email: "example@test.com"
+  password: "123123",
+})
+```
+
+### Create an account with multiple identifiers
+
+```js
+await auth.register({
+  username: "example",
+  email: "example@test.com"
+  phone: "+6143 3910 335",
+  password: "123123",
+})
+```
+
+### Create an account without a password
+
+Accounts created without a password must use the code login strategy. This means a temporary login code will be sent to the user via e-mail or phone. As such, cannot use a `username` only. An e-mail or phone must be supplied.
+
+```js
+await auth.register({
+  email: "example@test.com"
+})
+```
+
+### Create an account with custom data
+
+Every user can have their own profile object contains custom data about the user. This is perfect to store a users role or permissions.
+
+```js
+await auth.register({
+  email: "example@test.com",
+  password: "123123,
+  profile: {
+    role: "admin",
+  }
+})
+```
+
+### Register Options
+
+Option | Type | Required | Description
+--- | --- | --- | ---
+username | string | no | A unique username for this user
+email | string | no | A unique e-mail address for this user
+phone | string | no | A unique phone number for this use
+password | string | no | A password for the user
+profile | object | no | An object containing any keys are properties
+email_verified | boolean | no | Boolean indicating if e-mail has been verified
+phone_verified | boolean | no | Boolean indicating if phone has been verified 

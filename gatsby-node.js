@@ -29,9 +29,28 @@ exports.createPages = async ({ graphql, actions }) => {
         context: {},
       })
     }
-    else {
-      console.log("PREVIEW", node);
-    }
   })
 
+}
+
+exports.onCreateWebpackConfig = ({
+   stage,
+   rules,
+   loaders,
+   plugins,
+   actions,
+ }) => {
+  actions.setWebpackConfig({
+    module: {
+      rules: [
+        {
+          test: /\.mdx?$/,
+          use: [
+            'babel-loader',
+            '@mdx-js/loader'
+          ]
+        },
+      ],
+    },
+  })
 }

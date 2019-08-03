@@ -1,0 +1,50 @@
+
+
+The JavaScript SDK is the perfect way to authenticate users in web applications. It works both client-side and server-side. When used sever-side, it includes the ability to validate authentication tokens using a secret key.
+
+ There are two ways to install the SDK.
+
+ ### Install via NPM
+
+Installing the SDK via NPM is our recommend method. To install it use either of the following shell commands. The NPM package also includes TypeScript definitions.
+
+```bash
+npm install --save @ezauth/client
+# OR
+yarn add @ezauth/client
+```
+
+### Install via CDN
+
+A minified version of the SDK can be loaded directly via a CDN. This is perfectly fine to use for websites. Include the following script in your HTML before using ezAuth in any code.
+
+```html
+<script src="https://cdn.fastly.com/bundle/umd.js"></script>
+```
+
+### Initialize client-side
+
+Once you have installed the SDK, the next step is to initialize it.
+
+```javascript
+import EzAuth from "@ezauth/client" // ONLY FOR NPM INSTALL
+
+const auth = new EzAuth({
+  clientKey: "...",
+});
+```
+
+### Initialize server-side
+
+When initializing the SDK server-side, we can also include our secret key which is used to validate our authentication tokens. 
+
+```javascript
+import EzAuth from "@ezauth/client"
+
+const auth = new EzAuth({
+  secretKey: "..."
+  clientKey: "...",
+});
+```
+
+At this point, you are ready to start using ezAuth.

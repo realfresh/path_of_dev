@@ -10,9 +10,6 @@ html {
   font-size: 16px;
   color: $text-color;
 }
-body {
-  padding: 40px 0;
-}
 
 // TYPOGRAPHY
 h1, h2, h3, h4 {
@@ -63,5 +60,6 @@ pre[class*="language-"] {
 
 code[class*="language-"], pre[class*="language-"] {
   font-family: monospace !important;
-  font-size: 0.9rem !important;
+  font-size: 0.85rem !important;
+  text-shadow: none !important;
 }

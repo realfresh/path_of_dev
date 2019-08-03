@@ -78,6 +78,7 @@ interface Props extends PageRendererProps {
             title: string
             description: string
             date: string
+            preview: string
           }
         }
       }>
@@ -160,7 +161,7 @@ export default class BlogPostTemplate extends React.Component<Props> {
           <section className="recommend-articles">
             <p className="title">Latest Posts</p>
             <LinksList
-              links={data.allMarkdownRemark.edges.map(({node}) => ({
+              links={data.allMarkdownRemark.edges.filter(({node}) => node.frontmatter.preview !== "true").map(({node}) => ({
                 text: node.frontmatter.title,
                 link: node.frontmatter.path,
                 depth: 1,
@@ -204,7 +205,7 @@ export const pageQuery = graphql`
           }
       }
 
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { path: { ne: $path }}}, limit: 5) {
+      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { path: { ne: $path }, preview: { ne: "true" } }}, limit: 5) {
           edges {
               node {
                   frontmatter {
@@ -212,6 +213,7 @@ export const pageQuery = graphql`
                       title
                       description
                       date(formatString: "MMMM DD, YYYY")
+                      preview
                   }
               }
           }

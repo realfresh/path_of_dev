@@ -51,13 +51,8 @@ const Posts = styled.div`
       font-weight: 600;
     }
     > .details {
-
       margin-top: 5px;
       font-size: 0.85rem;
-      display: flex;
-      align-items: center;
-      .divider { margin: 0 5px; }
-      svg { margin-right: 5px; }
     }
     > .description {
       margin-top: 5px;
@@ -89,7 +84,7 @@ export default (props: Props) => (
                 <h2 className="title">{node.frontmatter.title}</h2>
                 <p className="details">
                   {node.frontmatter.date}
-                  <span className="divider">-</span>
+                  {` - `}
                   <Disqus.CommentCount
                     shortname={"path_of_dev"}
                     config={{
@@ -99,7 +94,7 @@ export default (props: Props) => (
                     }}>
                     0 Comments
                   </Disqus.CommentCount>
-                  <span className="divider">-</span>
+                  {` - `}
                   {Math.round(node.timeToRead * 1.4)} min read
                 </p>
                 <p className="description">{node.frontmatter.description}</p>

@@ -1,0 +1,343 @@
+---
+path: "/blog/build-react-router-alternative"
+date: "2019-08-06"
+title: "Build your own React router alternative"
+description: "Building your own router for React is easily accomplished. It's a great alternative to using an existing React routing package. See how and why in this article."
+---
+
+Before building a router for React, let's clear something up.
+
+**Many would say why re-invent the wheel?**
+
+There are already of number of popular routing packages such as:
+
+- [React Router](https://reacttraining.com/react-router)
+- [Navi](https://frontarm.com/navi/en)
+- [Reach Router](https://reach.tech/router)
+- [Buttermilk](https://github.com/probablyup/buttermilk)
+- [Hookrouter](https://github.com/Paratron/hookrouter)
+- [Wouter](https://github.com/molefrog/wouter) (my favorite)
+
+No doubt hundreds of developers have contributed their efforts to maintaining all these libraries.
+
+So let me make a case for why it's worth our time to re-invent the wheel. There is a decision that we must make every time we need new functionality in our code.
+
+**Do we write the functionality ourselves or try to use an existing package?**
+
+There is a trade-off associated with each of these options. When evaluating which option is best, some of the things that should be considered are:
+
+- Difficulty to self implement the required functionality
+- What do existing libraries offer that would not be worth self-implementing
+- Is the package dependable (or unmaintained / unstable)
+- Does the library introduce too many abstractions (too much magic)
+
+**Considering the above points, my experience has shown me that routing libraries can often have many unexpected effects due to their abstractions. That in turn leads to issues which are hard to debug.**
+
+Given how easy it is to implement basic routing, I think it's better to maintain your own routing functionality that you can easily tweak and modify to suit your requirements.
+
+If you do want to use an existing routing library, I highly recommend [Wouter](https://github.com/molefrog/wouter) due to its simplicity, minimal API and easy to read source code. That should make it easy to work with and maintain in the long-term.
+
+## Building your own React router
+
+Our basic React router will only have a few requirements.
+
+- Route component that renders a component for a given route pattern
+- Link component that changes route when clicked
+- API to programmatically get or modify the route
+
+If you want to follow along, start a new React project however you like. The easiest way would be to use [CodeSandbox](https://codesandbox.io/s/new).
+
+There is also a **working demo** at the bottom of this page.
+
+### Installing dependencies
+
+Our routing solution will make use of 2 other NPM libraries.
+
+- [history](https://www.npmjs.com/package/history) - API for managing browser history (3.6kb gzipped)
+- [querystringify](https://www.npmjs.com/package/querystringify) - parse query strings in URL (0.5kb gzipped)
+
+If you don't plan on using query parameters in your application, you can leave out the `querystringify` dependency.
+
+Install these libraries with the following command
+
+```bash
+yarn add history querystringify
+# OR
+npm install --save history querystringify
+```
+
+### Managing router state
+
+Routing information such as the current path should be available globally where needed. For example, our `Route` and `Link` components will need access to this information. 
+
+To avoid passing down routing information as props to our components, we will need a global state management solution. To do this without including another library, we are going to use the `context` API in React. 
+
+For those not familiar, the `context` API is React's built-in state management solution. If you do not want to use the `context` API, you could re-write this with any state management solution.
+
+The reason I picked the `context` API is because it works fine for this simple use-case and doesn't require an additional library.
+
+Before we create our `RouterContext`, let's start by defining a quick utility function to convert our current browser location as provided by the `history` API to our router state.
+
+```jsx
+// FILE: /router/utils.js
+
+import qs from "querystringify";
+
+export function locationToRoute(location) {
+  // location comes from the history package
+  return {
+    path: location.pathname,
+    hash: location.hash,
+    query: qs.parse(location.search),
+  };
+}
+```
+
+Once we have created that function, let's create our browser `history` and `RouterContext`.
+
+```jsx
+// FILE: /router/context.js
+
+import React from "react";
+import { createBrowserHistory } from "history";
+import { locationToRoute } from "./utils";
+
+export const history = createBrowserHistory();
+
+export const RouterContext = React.createContext({
+  route: locationToRoute(history.location),
+});
+```
+
+Our context is extremely simple. It will be initialized with an object containing the `route` property which is generated by passing `history.location` to the `locationToRoute` function. 
+
+With this, we can access `path`, `hash` and `query` throughout our application. Using this data, we can also build our own `Route` and `Link` components without the need to pass props down to them.
+
+### Building the Route & Link components
+
+Now let's build the 2 most important components in any React routing stack.
+
+- Route - renders a component if the supplied path matches the current route
+- Link - navigates to the supplied path using the `history` API to avoid re-loading the whole page
+
+To write these components, we are going to make use of the new `useContext` React API. This allows us to easily consume our `RouterContext` inside functional components. This is by far the easiest way to access context data at the time of writing this.
+
+Let's see how we can write these components.
+
+```jsx
+// FILE: /router/route.js
+
+import React from "react";
+import { RouterContext } from "./context"
+
+export function Route({ path, children }) {
+
+  // Extract route from RouterContext
+  const { route } = React.useContext(RouterContext);
+
+  // Return null if the supplied path doesn't match the current route path
+  if (route.path !== path) {
+    return null;
+  }
+
+  return children;
+
+}
+```
+
+The `Route` component is very straight forward. It takes 2 arguments, `path` and the `children` to be rendered. It loads the context data `route` property and checks to see if the `path` argument matches the current `route.path`. If matched, it renders the `children`.
+
+Our link component is very similar.
+
+```jsx
+// FILE: /router/link.js
+
+import React from "react";
+import { RouterContext, history } from "./context"
+
+export function Link(props) {
+
+  const { to, onClick, children } = props;
+
+  // Extract route from RouterContext
+  const { route } = React.useContext(RouterContext);
+
+  const handleClick = (e) => {
+
+    e.preventDefault();
+
+    // Dont' navigate if current path
+    if (route.path === to) {
+      return;
+    }
+
+    // Trigger onClick prop manually
+    if (onClick) {
+      onClick(e);
+    }
+
+    // Use history API to navigate page
+    history.push(to)
+
+  };
+
+  return (
+    <a {...props} onClick={handleClick}>
+      {children}
+    </a>
+  );
+
+}
+```
+
+The `Link` component only requires 2 arguments, `to` and `children`. The `to` argument specifies the location to navigate to when the `<a>` tag is clicked. We also spread the `props` argument into the `<a>` tag to ensure it's easy to customize the `Link` component.
+
+With our `Link` component, we must also import our browser `history` to access the browser navigation API, in this case `history.push(to)`. We supply a click handler to the `<a>` tag to navigate to the destination using this API.
+
+### The Router component
+
+For our nested components to consume and modify the `RouterContext`, we must create a provider component. Letls call this the `Router`. Its purpose is to do the following.
+
+- Accept two props, `routes` list which is an object containing our routes and `NotFound` which is our 404-page component
+- Supply a value to our `RouterContext` using the `Router` state
+- Listen for path changes with `history` and modify `Router` state accordingly
+- Use our `routes` list to determine if no route matched and render the 404-[age]
+- Export all our routing functionality in one single file
+
+```jsx
+// FILE: /router/index.js
+
+import React from "react";
+import { locationToRoute } from "./utils";
+import { history, RouterContext } from "./context"
+import { Route } from "./route";
+import { Link } from "./link";
+
+class Router extends React.Component {
+
+  constructor(props) {
+
+    super(props);
+
+    // Convert our routes into an array for easy 404 checking
+    this.routes = Object.keys(props.routes).map((key) => props.routes[key].path);
+
+    // Listen for path changes from the history API
+    this.unlisten = history.listen(this.handleRouteChange);
+
+    // Define the initial RouterContext value
+    this.state = {
+      route: locationToRoute(history.location),
+    };
+
+  }
+
+  componentWillUnmount() {
+    // Stop listening for changes if the Router component unmounts
+    this.unlisten();
+  }
+  
+  handleRouteChange = (location) => {
+    const route = locationToRoute(location);
+    this.setState({ route: route });
+  }
+
+  render() {
+
+    // Define our variables
+    const { children, NotFound } = this.props;
+    const { route } = this.state;
+
+    // Create our RouterContext value
+    const routerContextValue = { route };
+
+    // Check if 404 if no route matched
+    const is404 = this.routes.indexOf(route.path) === -1;
+
+    return (
+      <RouterContext.Provider value={routerContextValue}>
+        {is404 ? <NotFound/> : children}
+      </RouterContext.Provider>
+    );
+
+  }
+
+}
+
+export { history, RouterContext, Router, Route, Link }
+```
+
+That's it, our very simple `Router` component that acts as a provider for our `RouterContext` and listens for updates to the browser URL.
+
+### Putting it all together
+
+Congratulations! At this point, you have officially created a basic React router. How easy was that to understand? It's simple, lightweight, easy to maintain and easy to customize to your needs. 
+
+Now let's see how we can now create multiple pages in our React application. First, let's define our `routes`.
+
+```jsx
+// FILE: /routes.js
+export const routes = {
+  home: {
+    path: "/",
+  },
+  about: {
+    path: "/about"
+  },
+};
+```
+
+We could have used a simple array but an object structure like this is easy to extend. Later we could add authentication requirements or other useful data to our routes.
+
+Now let's create our application.
+
+```jsx
+// FILE: /index.js
+
+import React from "react";
+import ReactDOM from "react-dom";
+import {Router, Link, Route, history} from "./router";
+import {routes} from "./routes";
+
+function NotFound() {
+  return (
+    <div>
+      <p>404 - Not Found</p>
+      <Link to={routes.home.path}>Back to home</Link>
+    </div>
+  )
+}
+
+function App() {
+  return (
+    <Router routes={routes} NotFound={NotFound}>
+
+      <Route path={routes.home.path}>
+        <p>Home</p>
+        <Link to={routes.about.path}>Go to about</Link>
+        <Link to="/unknown">Go to unknown route</Link>
+        <div className="link" onClick={() => history.push(routes.about.path)}>
+          Programmatically go to about
+        </div>
+      </Route>
+
+      <Route path={routes.about.path}>
+        <p>About</p>
+        <Link to={routes.home.path}>Go to home</Link>
+      </Route>
+
+    </Router>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+That's all there is to it. A page with two routes `/` and `/about`. You can easily render your content for each page. If you visit an unknown page, the 404 `NotFound` component will be rendered.
+
+Hopefully, you now see building your own React router is a very viable alternative to using an existing package. This implementation is so simple to reason with and best of all, for those familiar with React, there is no magic going on.
+
+## Working demo
+
+<iframe src="https://codesandbox.io/embed/basic-react-routing-2exj8?autoresize=1&fontsize=14" title="basic-react-routing" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media" style="width:100%; height:500px; border:0; border-radius: 4px; overflow:hidden;" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"></iframe>

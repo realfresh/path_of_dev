@@ -1301,6 +1301,13 @@
     react-lifecycles-compat "^3.0.4"
     warning "^3.0.0"
 
+"@rebass/grid@^6.0.0":
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/@rebass/grid/-/grid-6.0.0.tgz#79ad5ae7951bba41a62db5caf1ee2006a201b3b1"
+  integrity sha512-2pbkfObgbfbPUL+spk5JaYt+L4zXAayBLfdDuqnDUxBcBRe2SMqDBTOkEcq1tQvsuhmtfkZ9rB51FyjBkO92vw==
+  dependencies:
+    styled-system "^4.0.6"
+
 "@sindresorhus/is@^0.7.0":
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.7.0.tgz#9a06f4f137ee84d7df0460c1fdb1135ffa6c50fd"
@@ -1436,6 +1443,14 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
+"@types/rebass__grid@^6.0.5":
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/@types/rebass__grid/-/rebass__grid-6.0.5.tgz#61c5cc21f3b9c65a4a836b9fb663e4da4e19a22f"
+  integrity sha512-8sIJIwThr9vJueZBtk2G4m+yKSbZbgU5T8hGHvmgVafIhqx3oqNUkSWzBtI3MpXhOpaPF9Oh+KBk3TLDp5Ad4A==
+  dependencies:
+    "@types/react" "*"
+    "@types/styled-system" "*"
+
 "@types/rehype-react@^3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@types/rehype-react/-/rehype-react-3.1.0.tgz#889bd406e5f182725a810466a11bdc6bf6443d59"
@@ -1451,6 +1466,13 @@
     "@types/react" "*"
     "@types/react-native" "*"
     csstype "^2.2.0"
+
+"@types/styled-system@*":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@types/styled-system/-/styled-system-5.0.1.tgz#b0af58267e06c5ea18fbe6977fcc5347a56cc847"
+  integrity sha512-LulwelnGe9yU95yDqB+g9uD0gAn1S3KQyWWKXAOl6uwWtd4lS+q+oGlyHENL+m5zYBNbM5Qi1zoYYLelW29/pg==
+  dependencies:
+    csstype "^2.6.4"
 
 "@types/tmp@^0.0.32":
   version "0.0.32"
@@ -3749,6 +3771,11 @@ csstype@^2.2.0:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.5.tgz#1cd1dff742ebf4d7c991470ae71e12bb6751e034"
   integrity sha512-JsTaiksRsel5n7XwqPAfB0l3TFKdpjW/kgAELf9vrb5adGA7UCPLajKK5s3nFrcFm3Rkyp/Qkgl73ENc1UY3cA==
+
+csstype@^2.6.4:
+  version "2.6.6"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.6.tgz#c34f8226a94bbb10c32cc0d714afdf942291fc41"
+  integrity sha512-RpFbQGUE74iyPgvr46U9t1xoQBM8T4BL8SxrN66Le2xYAPSaDJJKeztV3awugusb3g3G9iL8StmkBBXhcbbXhg==
 
 currently-unhandled@^0.4.1:
   version "0.4.1"
@@ -12085,6 +12112,14 @@ styled-components@^4.3.2:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
+
+styled-system@^4.0.6:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/styled-system/-/styled-system-4.2.4.tgz#8909f91396c30b92295b4eddec5f7b89f8c8d767"
+  integrity sha512-44X7n09gDvwx7yjquEXsjiNALK0dxGgAJdpO5cb/PdL+D4mhSLKWig4/EhH4vHJLbwu/kumURHyvKxygaBfg0A==
+  dependencies:
+    "@babel/runtime" "^7.4.2"
+    prop-types "^15.7.2"
 
 stylehacks@^4.0.0:
   version "4.0.3"

@@ -1,0 +1,81 @@
+
+
+The JavaScript SDK is the perfect way to authenticate users in web applications. It works both client-side and server-side. When used sever-side, it includes the ability to validate authentication tokens using a secret key.
+
+### How ezAuth works
+
+ezAuth is a token based authentication system that follows the JSON Web Token (JWT) convention. The advantage of a JWT based system is that it provides a stateless means of user authentication as opposed to session based authentication.
+
+JWT's work by creating a unique token to represent a logged in user. Part of this token contains a Base64Url encoded string containing information about the logged in user. This is useful both client and server side as we have access to data such as the user ID or email to use in our applications.
+
+This token will generally be stored in a users cookies or localstorage and sent in the `Authorization` header with every API request to your server.
+
+Once the token arrives at your server, you are then able to validate the contents of the token to ensure it was not tampered with. This requires the use of a server-side secret key.
+
+Once the token is validated, you can then trust the data inside the token and proceed with the users authenticated request.
+
+### Built on Promises
+
+The JavaScript SDK is completely built on promises and does not offer callbacks. At this stage, callbacks are slowly becoming redundant. With promises, `async` functions make it much easier to write clean and maintainable code. As such, all the examples in this documentation will make use of the `async` functions.
+
+If you are not familiar with using promises or the `async` function syntax, we recommend reading the following guides from the MDN web docs.
+
+- [Graceful asynchronous programming with Promises
+](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises)
+- [Making asynchronous programming easier with async and await](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await)
+
+### Browser support
+
+As mentioned above, this library makes extensive use of promises. Aside from that, it is ES5 compatible. As of right now, [every major browser supports promises](https://caniuse.com/#feat=promises). For most use-cases you should have no issues using our SDK.
+
+If you are using our JS SDK in an older browser like IE11, you will need to include a polyfill for promises if you haven't already included one. The simplest way to do this would be to use the [Polyfill.io](https://polyfill.io/v3/) service.
+
+### Error handling
+
+Whenever an error occurs (promise rejected), you will be supplied with an object containing the `code` property. The unique code will indicate what caused the error allowing you to handle it gracefully.
+
+```js
+async function register() {
+  try {
+    const email = "test@example.com";
+    const password = "123abc";
+    await auth.register({ email, password });
+  } 
+  catch (e) {
+    if (e.code === auth.errors.register_email_exists) {
+      // HANDLE ERROR
+    }
+    else {
+     // HANDLE GENERIC ERROR
+    }
+  }
+}
+```
+
+### TypeScript definitions
+
+This project was built with TypeScript. As such, the JS SDK ships with it's own TypeScript definitions. You can also be certain that the type definitions provided will always be up-to date
+
+### Security concerns
+
+Due to the nature of this service, security is a top priority. You can be assured that we will not cut any corners. For us, security is not about being innovative (which can be bad). Rather, it's about following the ever evolving best practices of our software development industry.
+
+#### Token storage
+
+#### Token validation
+
+#### Token expiry
+
+#### Token invalidation
+
+#### Dependency check
+
+With the large amount of dependency related security breaches in the NPM ecosystem, we decided to make this part a priority.
+
+As such, we aim to minimise the amount of dependencies for the library. Right now there are only 2 direct dependencies used. Those are:
+
+- axios
+- jsonwebtoken 
+
+
+With these dependecies, the total size of the SDK gzipped comes up to 25kb.

@@ -69,6 +69,7 @@ interface Props extends PageRendererProps {
         title: string
         description: string
       }
+      timeToRead: number
     }
     allMarkdownRemark: {
       edges: Array<{
@@ -135,49 +136,53 @@ export default class BlogPostTemplate extends React.Component<Props> {
               <Disqus.CommentCount shortname={disqusShortname} config={disqusConfig}>
                 0 Comments
               </Disqus.CommentCount>
+              {` - `}
+              {Math.round(post.timeToRead * 1.4)} min read
             </p>
           </header>
 
-          {post.headings.length > 0 && (
-            <div className="toc">
-              <p className="title">Contents</p>
-              <LinksList
-                links={(() => {
-                  return post.headings.map(({ value, depth }) => {
-                    const link = `#${seoUrl(value)}`
-                    return { depth, link, text: value, internal: false }
-                  })
-                })()}
-              />
+          <div className="content">
+            {post.headings.length > 0 && (
+              <div className="toc">
+                <p className="title">Contents</p>
+                <LinksList
+                  links={(() => {
+                    return post.headings.map(({ value, depth }) => {
+                      const link = `#${seoUrl(value)}`
+                      return { depth, link, text: value, internal: false }
+                    })
+                  })()}
+                />
+              </div>
+            )}
+
+            <div className="post">
+              {renderMarkdown(post.htmlAst)}
             </div>
-          )}
 
-          <div className="post">
-            {renderMarkdown(post.htmlAst)}
+            <Divider/>
+
+            <section className="recommend-articles">
+              <p className="title">Latest Posts</p>
+              <LinksList
+                links={data.allMarkdownRemark.edges.filter(({node}) => node.frontmatter.preview !== "true").map(({node}) => ({
+                  text: node.frontmatter.title,
+                  link: node.frontmatter.path,
+                  depth: 1,
+                  internal: true,
+                }))}
+              />
+            </section>
+
+            <Divider/>
+
+            <section className="disqus-comments">
+              <Disqus.DiscussionEmbed
+                shortname={disqusShortname}
+                config={disqusConfig}
+              />
+            </section>
           </div>
-
-          <Divider/>
-
-          <section className="recommend-articles">
-            <p className="title">Latest Posts</p>
-            <LinksList
-              links={data.allMarkdownRemark.edges.filter(({node}) => node.frontmatter.preview !== "true").map(({node}) => ({
-                text: node.frontmatter.title,
-                link: node.frontmatter.path,
-                depth: 1,
-                internal: true,
-              }))}
-            />
-          </section>
-
-          <Divider/>
-
-          <section className="disqus-comments">
-            <Disqus.DiscussionEmbed
-              shortname={disqusShortname}
-              config={disqusConfig}
-            />
-          </section>
 
         </BlogPostWrapper>
 
@@ -201,8 +206,8 @@ export const pageQuery = graphql`
               path
               title
               description
-              
           }
+          timeToRead
       }
 
       allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, filter: { frontmatter: { path: { ne: $path }, preview: { ne: "true" } }}, limit: 5) {

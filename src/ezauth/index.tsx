@@ -17,7 +17,7 @@ const mdxComponents = {
 interface Props extends PageRendererProps {}
 
 const content = css`
-  max-width: 900px;
+  max-width: 1024px;
   margin: 0 auto;
   padding: 0 20px;
 `

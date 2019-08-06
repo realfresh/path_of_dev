@@ -4,11 +4,20 @@ import { theme } from "../theme"
 
 export const BlogPostWrapper = styled.article`
 
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 60px 0;
+
   header {
     .details {
       font-size: 0.9rem;
       margin-top: 5px;
     }
+  }
+  
+  > .content {
+    max-width: 680px;
+    margin: 0 auto;
   }
   
   .toc {
@@ -60,10 +69,11 @@ export const BlogPostWrapper = styled.article`
     }
     
     p {
-      line-height: 1.7;
+      line-height: 1.8;
     }
     
     p, li {
+      font-size: 1rem;
       > code {
         background: rgba(47,208,35,0.15);
         padding: 3px 5px;

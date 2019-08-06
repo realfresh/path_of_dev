@@ -1,4 +1,5 @@
 import React from "react"
+import Introduction from "./js/Introduction.mdx"
 import Install from "./js/Install.mdx"
 import Register from "./js/Register.mdx"
 import LoginPassword from "./js/LoginPassword.mdx"
@@ -14,7 +15,7 @@ export const ezAuthInstructions = [
     steps: [
       {
         title: "Introduction",
-        body: <Install/>
+        body: <Introduction/>
       },
       {
         title: "Install",

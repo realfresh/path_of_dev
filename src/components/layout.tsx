@@ -12,9 +12,7 @@ const Wrapper = styled.div`
 `
 
 const Content = styled.main`
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 60px 20px;
+  padding: 0 20px;
 `
 
 export const Layout = ({ children }: Props) => {

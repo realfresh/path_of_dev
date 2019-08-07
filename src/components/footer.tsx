@@ -5,12 +5,11 @@ import { FaGithub } from "react-icons/fa"
 import { theme } from "../theme"
 
 const FooterComponent = styled.footer`
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 0 20px;
+  background: ${theme.gray10};
+  padding: 20px;
   .content {
-    ${boxStyles};
-    padding: 20px; 
+    max-width: ${theme.content_lg}px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;

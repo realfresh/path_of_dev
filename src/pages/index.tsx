@@ -7,7 +7,7 @@ import {Layout} from "../components/layout"
 import {SEO} from "../components/seo"
 import {boxStyles} from "../components/box"
 import { Flex, Box } from "@rebass/grid"
-import { FaRegClock } from "react-icons/fa"
+import { SideColumn } from "../components/SideColumn"
 
 interface Props extends PageRendererProps {
   data: {
@@ -29,13 +29,36 @@ interface Props extends PageRendererProps {
 }
 
 const Page = styled.div`
-  max-width: 1000px;
+  max-width: ${theme.content_lg}px;
   margin: 0 auto;
-  padding: 60px 0;
+`
+
+const SiteInfo = styled.div`
+  h2 {
+    margin-top: 30px;
+    margin-bottom: 16px;
+    font-size: 1.1rem;
+    padding: 8px 14px;
+    background: ${theme.gray10};
+    border-left: 2px solid ${theme.primary};
+    &:first-child { margin-top: 0 }
+  }
+  p, ul {
+    padding: 0 10px;
+    font-size: 0.95rem;
+    margin-top: 8px;
+  }
+  ul {
+    list-style: none;
+  }
+  a {
+    color: ${theme.text};
+    text-decoration: none;
+  }
 `
 
 const Posts = styled.div`
-  margin-top: 30px;
+  margin-top: 15px;
   .post {
     ${boxStyles};
     display: flex;
@@ -75,34 +98,55 @@ export default (props: Props) => (
       <link rel="canonical" href="https://pathof.dev"/>
     </SEO>
     <Page>
-      <h1 className="lhp">Latest Posts</h1>
-      <Posts>
-        <Flex as="ul" flexWrap="wrap" alignItems="stretch" m={-3}>
-          {props.data.allMarkdownRemark.edges.map(({ node }, i) => node.frontmatter.preview === "true" ? null : (
-            <Box key={i} as="li" width={[1, 0.5]} p={3} flex="0 1 auto">
-              <Link className="post" to={node.frontmatter.path}>
-                <h2 className="title">{node.frontmatter.title}</h2>
-                <p className="details">
-                  {node.frontmatter.date}
-                  {` - `}
-                  <Disqus.CommentCount
-                    shortname={"path_of_dev"}
-                    config={{
-                      url: `https://pathof.dev/${node.frontmatter.path}`,
-                      identifier: node.frontmatter.path,
-                      title: node.frontmatter.title,
-                    }}>
-                    0 Comments
-                  </Disqus.CommentCount>
-                  {` - `}
-                  {Math.round(node.timeToRead * 1.4)} min read
-                </p>
-                <p className="description">{node.frontmatter.description}</p>
-              </Link>
-            </Box>
-          ))}
-        </Flex>
-      </Posts>
+
+      <SideColumn className="main-content">
+        <SiteInfo className="side">
+
+          <div className="section">
+            <h2 className="lhp">About this site</h2>
+            <p className="lhp small">
+              Becoming a developer is the hardest thing I've done in my life. With my experience, I hope to simplify web development with tutorials and opens-source projects.
+            </p>
+          </div>
+
+          <h2 className="lhp">Open-source projects</h2>
+          <ul className="list-unordered">
+            <li><a href="https://github.com/path-of-dev/Untrusive">⌛ Untrusive - indeterminate loading bar</a></li>
+          </ul>
+
+        </SiteInfo>
+        <div className="main">
+          <h2 className="lhp">Latest Posts</h2>
+          <Posts>
+            <Flex as="ul" flexWrap="wrap" alignItems="stretch" m={-2}>
+              {props.data.allMarkdownRemark.edges.map(({ node }, i) => node.frontmatter.preview === "true" ? null : (
+                <Box key={i} as="li" width={[1, 0.5]} p={2} flex="0 1 auto">
+                  <Link className="post" to={node.frontmatter.path}>
+                    <h3 className="title">{node.frontmatter.title}</h3>
+                    <p className="details">
+                      {node.frontmatter.date}
+                      {` - `}
+                      <Disqus.CommentCount
+                        shortname={"path_of_dev"}
+                        config={{
+                          url: `https://pathof.dev/${node.frontmatter.path}`,
+                          identifier: node.frontmatter.path,
+                          title: node.frontmatter.title,
+                        }}>
+                        0 Comments
+                      </Disqus.CommentCount>
+                      {` - `}
+                      {Math.round(node.timeToRead * 1.4)} min read
+                    </p>
+                    <p className="description">{node.frontmatter.description}</p>
+                  </Link>
+                </Box>
+              ))}
+            </Flex>
+          </Posts>
+        </div>
+      </SideColumn>
+
     </Page>
   </Layout>
 )

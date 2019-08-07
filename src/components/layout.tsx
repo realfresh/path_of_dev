@@ -8,11 +8,11 @@ interface Props {
 }
 
 const Wrapper = styled.div`
-  padding: 40px 0;
+  padding: 0 0;
 `
 
 const Content = styled.main`
-  padding: 0 20px;
+  padding: 60px 20px;
 `
 
 export const Layout = ({ children }: Props) => {

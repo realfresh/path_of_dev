@@ -5,4 +5,6 @@ export const theme = {
   dark95: "#090909",
   dark90: "#191919",
   gray10: "#f9f9f9",
+  gray20: "#efefef",
+  content_lg: 1100,
 }

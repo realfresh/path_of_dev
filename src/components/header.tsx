@@ -6,24 +6,31 @@ import { theme } from "../theme"
 import { boxStyles } from "./box"
 
 const HeaderComponent = styled.header`
+  background: ${theme.text};
+  color: white;
+  padding: 20px 20px;
   .content {
-    ${boxStyles};
-    display: block;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin: 0 auto;
-    max-width: 460px;
-    padding: 25px 25px 23px 25px;
-    text-align: center;
-    color: ${theme.text};
-    text-decoration: none;
+    max-width: ${theme.content_lg}px;
   }
   .tagline {
-    margin-top: 14px;
-    font-weight: 600;
-    font-size: 0.9rem;
+    color: white;
+    font-size: 0.85rem;
     line-height: 1.2;
+    font-weight: 600;
+    @media (max-width: 420px) {
+      display: none;
+    }
+  }
+  .logo {
+    text-decoration: none;
   }
   .title {
-    font-size: 1.6rem;
+    color: white;
+    font-size: 1.2rem;
     .highlight {
       color: ${theme.primary};
     }
@@ -41,28 +48,19 @@ const tagLines = [
   "If you just started programming, brace yourself...",
   "Don't blame the computer, it's usually your fault",
   "The night is young and full of errors :(",
-  "Do I risk asking a question on Stack Overflow?",
   "Think twice before installing random packages",
   "Yes, this name was inspired by Path Of Exile",
 ]
 
 export const Header = () => (
   <HeaderComponent>
-
-    <Link to="/" className="content">
-
-      <h1 className="title font-heading-alt">
-        path_of_<span className="highlight">dev</span>
-      </h1>
-
-      <Typist
-        className="tagline font-heading-alt"
-        cursor={{ hideWhenDone: true, hideWhenDoneDelay: 0 }}
-        avgTypingDelay={50}>
-        {tagLines[Math.floor(Math.random() * tagLines.length)]}
-      </Typist>
-
-    </Link>
-
+    <div className="content">
+      <Link to="/" className="logo">
+        <h1 className="title">
+          path_of_<span className="highlight">dev</span>
+        </h1>
+      </Link>
+      <p className="tagline">Simplifying web development</p>
+    </div>
   </HeaderComponent>
 )

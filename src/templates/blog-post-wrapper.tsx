@@ -45,12 +45,9 @@ export const BlogPostWrapper = styled.article`
     }
     
     h2, h3, h4 {
-      ${boxStyles};
       line-height: 1.3;
-      padding: 10px 24px;
-      border-left: 4px solid ${theme.primary};
-      align-self: center;
-      min-width: 109%;
+      border-left: 3px solid ${theme.primary};
+      background: ${theme.gray10};
       a {
         color: ${theme.text};
         text-decoration: none;
@@ -60,12 +57,12 @@ export const BlogPostWrapper = styled.article`
     h2 {
       margin-top: 50px;
       margin-bottom: 10px;
+      padding: 16px 16px;
     }
     
     h3, h4 {
       margin-top: 40px;
-      padding: 8px 12px;
-      min-width: 104%;
+      padding: 12px 16px;
     }
     
     p {

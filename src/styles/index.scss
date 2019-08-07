@@ -6,14 +6,14 @@ $text-color: #292929;
 
 // BASE
 html {
-  font-family: 'Roboto Slab', serif;
+  font-family: Helvetica Neue, Helvetica, Arial, serif;
   font-size: 16px;
   color: $text-color;
 }
 
 // TYPOGRAPHY
 h1, h2, h3, h4 {
-  font-family: 'Roboto Mono', monospace;
+  font-family: Helvetica Neue, Helvetica, Arial, serif;
   font-weight: 600;
 }
 h1 {
@@ -32,7 +32,7 @@ p {
   line-height: 1.5rem;
 }
 a {
-  color: $primary-color;
+  color: darken($primary-color, 3%);
 }
 
 // FONT HELPERS
@@ -62,4 +62,16 @@ code[class*="language-"], pre[class*="language-"] {
   font-family: monospace !important;
   font-size: 0.85rem !important;
   text-shadow: none !important;
+}
+
+.list-unordered {
+  padding: 0 0 0 25px;
+  list-style: disc;
+  li {
+    line-height: 1.7;
+    margin-bottom: 8px;
+    &:last-child {
+      margin-bottom: 0
+    }
+  }
 }

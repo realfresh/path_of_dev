@@ -5,14 +5,8 @@ import {theme} from "../theme"
 import {SEO} from "../components/seo"
 import {LogoGenerator} from "../components/logo"
 import {Instructions} from "../components/instructions"
-import {PrismMdxTokenise} from "../components/prismMdxTokenise"
-import {MDXProvider} from "@mdx-js/react"
 import {ezAuthInstructions} from "./instructions"
-
-const mdxComponents = {
-  pre: (props: any) => <div {...props} />,
-  code: PrismMdxTokenise,
-}
+import { MDXProvider } from "../components/MdxProvider"
 
 interface Props extends PageRendererProps {}
 
@@ -104,7 +98,7 @@ export default class EzAuthHome extends React.Component<Props> {
 
   render() {
     return (
-      <MDXProvider components={mdxComponents}>
+      <MDXProvider>
         <Layout>
           <SEO title="ezAuth - The simplest authentication system for applications">
             <link rel="canonical" href="https://pathof.dev/ezauth"/>

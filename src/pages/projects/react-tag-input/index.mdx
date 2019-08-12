@@ -1,0 +1,181 @@
+## Installation
+
+Install the component via NPM package manager
+
+```bash
+npm install --save @pathofdev/react-tag-input
+```
+
+Import the compiled CSS in your bundle or copy the CSS file
+
+```js
+import "@pathofdev/react-tag-input/build/index.css";
+```
+
+You can also import that raw SCSS file and override the variables inside. See towards the bottom of this page for a more detailed example.
+
+```scss
+@import "node_modules/@pathofdev/react-tag-input/src/styles/index.scss";
+```
+
+## Usage
+
+The simplest working example looks like this.
+
+```jsx
+import React from "react";
+import ReactDOM from "react-dom";
+import ReactTagInput from "@pathofdev/react-tag-input";
+import "@pathofdev/react-tag-input/build/index.css";
+
+function App() {
+  const [tags, setTags] = React.useState(["example tag"])
+  return (
+    <ReactTagInput 
+      tags={tags} 
+      onChange={(newTags) => setTags(newTags)}
+    />
+  )
+}
+
+const root = document.getElementById("root");
+ReactDOM.render(<App/>, root);
+```
+
+Below is an example of usage with all the available options
+
+```jsx
+<ReactTagInput 
+  tags={tags} 
+  placeholder="Type and press enter"
+  maxTags={10}
+  editable={true}
+  readOnly={false}
+  removeOnBackspace={true}
+  onChange={(newTags) => setTags(newTags)}
+  validator={(value) => {
+    // Don't actually validate e-mails this way
+    const isEmail = value.indexOf("@") !== -1;
+    if (!isEmail) {
+      alert("Please enter an e-mail address");
+    }
+    // Return boolean to indicate validity
+    return isEmail;
+  }}
+/>
+```
+
+## Component props
+
+Prop | Type | Required | Description
+--- | --- | --- | ---
+tags | string[] | yes | A string array containing a list of tags
+onChange | function | yes | A function that receives the updated tags, used to update your state 
+placeholder | string | no | The placeholder for the inner input field, defaults to "Type and press enter"
+maxTags | number | no | Set the maximum number of tags allowed. Once reached, the inner input field will be hidden. Defaults to undefined which is unlimited 
+editable | boolean | no | If enabled, a user can click a tag and change it's value directly. Defaults to false
+readOnly | boolean | no | If enabled, tags cannot be edited or removed and the inner input field is hidden. Defaults to false
+removeOnBackspace | boolean | no | If enabled, a user can delete a tag if they press backspace when focused on the inner input field or a specific tag input field. Defaults to false
+validator | function | no | A function that receives a specific tag value that a user is attempting to add and returns a boolean indicating if it is valid. If invalid, the tag will not be added
+
+## Customizing style
+
+The styling of this component consists of 5 different classes. You can override any of the styles using these 5 CSS classes.
+
+```css
+.react-tag-input {} /* Wrapper */
+.react-tag-input__input {} /* Inner input */
+.react-tag-input__tag {} /* Tag wrapper */
+.react-tag-input__tag__content {} /* The text content within the tag */
+.react-tag-input__tag__remove {} /* The remove button & icon for a tag */
+```
+
+### Font size
+
+The entire component sets a base `font-size` of `1rem` and uses the `em` unit for all child elements. This means that the component should adapt to your existing sizing by default. However, if you do need to modify its size, you can customize the `font-size` property on the wrapper and everything else will respond accordingly.
+
+```css
+.react-tag-input {
+    font-size: 14px; /* specific font size */
+    font-size: 1.5rem; /* responsive font size */
+}
+```
+
+If you need to set a specific font size for a particular area, simply target it with the appropriate CSS class.
+
+```css
+.react-tag-input__input {
+    font-size: 14px;
+}
+```
+
+### Input height
+
+I recommend customizing the input height using the `font-size` property on the wrapper. The advantage of this method is it scales all the inner components appropriately. 
+
+If you need the input to match a particular height you can set a height directly on the wrapper class. You may need to customize the inner components to match your new height.
+
+```css
+.react-tag-input {
+    min-height: 50px;
+}
+```
+
+### Colors
+
+All the colors of the component are easy to override. Here are all the specific color styles.
+
+```css
+.react-tag-input {
+  background: white;
+  color: #333;
+  border: 1px solid #e1e1e1;
+}
+.react-tag-input__input {
+  background: transparent;
+  color: #333;
+}
+.react-tag-input__input::placeholder, .react-tag-input__input:-moz-placeholder, .react-tag-input__input:-ms-input-placeholder, .react-tag-input__input::-moz-placeholder, .react-tag-input__input::-webkit-input-placeholder {
+  color: #333; /* Input placeholder */ 
+}
+.react-tag-input__tag {
+  background: #e1e1e1;
+}
+.react-tag-input__tag__remove {
+  background: #d4d4d4;
+}
+.react-tag-input__tag__remove:before, .react-tag-input__tag__remove:after {
+  background: #333; /* X icon in remove button */
+}
+```
+
+### Overriding SCSS variables
+
+The easiest way to customize the component styles is by importing the raw SCSS files and overriding the variables.
+
+```scss
+// Override variables
+$reactTagColorGray: #e1e1e1 !default;
+$reactTagColorText: #333 !default;
+$reactTagHeight: 2.375em !default;
+$reactTagFontSize: 1em !default;
+$reactTagBorderRadius: 3px !default;
+$reactTagMarginPadding: 0.1875em !default;
+
+// Import the SCSS file
+@import "node_modules/@pathofdev/react-tag-input/src/styles/index.scss";
+```
+
+## Contributing
+
+Have any issues or suggestions? Create an [issue on GitHub](https://github.com/path-of-dev/react-tag-input/issues/new)
+
+If you would like to contribute to the development of this project, you need to:
+
+- Fork the [GitHub repo](https://github.com/path-of-dev/react-tag-input)
+- Make the required changes on your fork
+- Submit a pull request in the main repo comparing your fork
+
+## License
+
+This project makes use of the MIT license

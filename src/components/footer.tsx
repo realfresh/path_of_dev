@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import { boxStyles } from "./box"
 import { FaGithub } from "react-icons/fa"
 import { theme } from "../theme"
 
@@ -36,7 +35,7 @@ const FooterComponent = styled.footer`
 export const Footer = () => (
   <FooterComponent>
     <div className="content">
-      <div className="copyright">path_of_dev © {new Date().getFullYear()}</div>
+      <div className="copyright">pathofdev © {new Date().getFullYear()}</div>
       <a className="github" href="https://github.com/realfresh/path_of_dev" target="_blank">
         <span className="text">See site code on GitHub</span>
         <FaGithub className="icon"/>

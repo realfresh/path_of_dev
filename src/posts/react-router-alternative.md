@@ -78,9 +78,7 @@ The reason I picked the `context` API is because it works fine for this simple u
 
 Before we create our `RouterContext`, let's start by defining a quick utility function to convert our current browser location as provided by the `history` API to our router state.
 
-```jsx
-// FILE: /router/utils.js
-
+```jsx /router/utils.js
 import qs from "querystringify";
 
 export function locationToRoute(location) {
@@ -95,9 +93,7 @@ export function locationToRoute(location) {
 
 Once we have created that function, let's create our browser `history` and `RouterContext`.
 
-```jsx
-// FILE: /router/context.js
-
+```jsx /router/context.js
 import React from "react";
 import { createBrowserHistory } from "history";
 import { locationToRoute } from "./utils";
@@ -124,9 +120,7 @@ To write these components, we are going to make use of the new `useContext` Reac
 
 Let's see how we can write these components.
 
-```jsx
-// FILE: /router/route.js
-
+```jsx /router/route.js
 import React from "react";
 import { RouterContext } from "./context"
 
@@ -149,9 +143,7 @@ The `Route` component is very straight forward. It takes 2 arguments, `path` and
 
 Our link component is very similar.
 
-```jsx
-// FILE: /router/link.js
-
+```jsx /router/link.js
 import React from "react";
 import { RouterContext, history } from "./context"
 
@@ -204,9 +196,7 @@ For our nested components to consume and modify the `RouterContext`, we must cre
 - Use our `routes` list to determine if no route matched and render the 404-[age]
 - Export all our routing functionality in one single file
 
-```jsx
-// FILE: /router/index.js
-
+```jsx /router/index.js
 import React from "react";
 import { locationToRoute } from "./utils";
 import { history, RouterContext } from "./context"
@@ -275,8 +265,7 @@ Congratulations! At this point, you have officially created a basic React router
 
 Now let's see how we can now create multiple pages in our React application. First, let's define our `routes`.
 
-```jsx
-// FILE: /routes.js
+```jsx /routes.js
 export const routes = {
   home: {
     path: "/",
@@ -291,9 +280,7 @@ We could have used a simple array but an object structure like this is easy to e
 
 Now let's create our application.
 
-```jsx
-// FILE: /index.js
-
+```jsx /index.js
 import React from "react";
 import ReactDOM from "react-dom";
 import {Router, Link, Route, history} from "./router";

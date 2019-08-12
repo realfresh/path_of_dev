@@ -33,7 +33,7 @@ yarn add --dev babel-plugin-prismjs
 
 Next we need to **add the plugin configuration to our .babelrc file**. If you do not already have a .babelrc file, create one in the root folder of your source code. Then add the following JSON to the .babelrc file.
 
-```json
+```json .babel.rc
 {
   "plugins": [
     ["prismjs", {

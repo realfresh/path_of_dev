@@ -1,41 +1,12 @@
 import styled from "styled-components"
-import { boxStyles } from "../components/box"
 import { theme } from "../theme"
 
-export const BlogPostWrapper = styled.article`
-
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 60px 0;
-
-  header {
-    .details {
-      font-size: 0.9rem;
-      margin-top: 5px;
-    }
-  }
+export const MarkDownContent = styled.div`
   
-  > .content {
-    max-width: 680px;
-    margin: 0 auto;
-  }
-  
-  .toc {
-    margin-top: 30px;
-    .title {
-      font-size: 0.9rem;
-      font-weight: 600;
-      line-height: 1;
-      margin-bottom: 10px;
-    }
-  }
-  
-  .post > div {
+  > div {
   
     display: flex;
     flex-direction: column;
-    padding-top: 30px;
-    padding-bottom: 60px;
     
     > * {
       margin-top: 25px;
@@ -67,6 +38,7 @@ export const BlogPostWrapper = styled.article`
     
     p {
       line-height: 1.8;
+      margin-bottom: -5px;
     }
     
     p, li {
@@ -101,7 +73,7 @@ export const BlogPostWrapper = styled.article`
       list-style: disc;
       li {
         line-height: 1.7;
-        margin-bottom: 8px;
+        margin-bottom: 4px;
         &:last-child { 
           margin-bottom: 0 
         }
@@ -136,21 +108,6 @@ export const BlogPostWrapper = styled.article`
         line-height: 1.2rem;
       }
     }
-  }
-  
-  .recommend-articles {
-    padding-top: 52px;
-    padding-bottom: 60px;
-    .title {
-      font-size: 1.2rem;
-      font-weight: 600;
-      line-height: 1;
-      margin-bottom: 15px;
-    }
-  }
-  
-  .disqus-comments {
-    padding-top: 60px;
   }
   
 `

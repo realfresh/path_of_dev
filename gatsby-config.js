@@ -7,9 +7,9 @@ if (process.env.NODE_ENV === "development") {
 
 module.exports = {
   siteMetadata: {
-    title: `path_of_dev`,
+    title: `pathofdev`,
     description: `A blog with the aim to help simplify web development with helpful discussions and tutorials`,
-    author: `@path_of_dev`,
+    author: `@pathofdev`,
     siteUrl: 'https://pathof.dev'
   },
   plugins: [
@@ -76,6 +76,10 @@ module.exports = {
             "/": {
               priority: 1,
               changefreq: "daily",
+            },
+            "/projects/react-tag-input": {
+              priority: 0.8,
+              changefreq: "weekly",
             }
           };
 

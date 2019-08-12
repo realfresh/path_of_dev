@@ -4,11 +4,14 @@ import Disqus from "disqus-react"
 import RehypeReact from "rehype-react"
 import ImageZoom from "react-medium-image-zoom"
 import {graphql, Link, PageRendererProps} from "gatsby"
-import {Layout} from "../components/layout"
+import {LayoutSideColumn} from "../components/LayoutSideColumn"
 import {SEO} from "../components/seo"
 import {LinksList} from "../components/links-list"
 import {Divider} from "../components/divider"
-import {BlogPostWrapper} from "./blog-post-wrapper"
+import {MarkDownContent} from "../components/MarkdownContent"
+import styled from "styled-components"
+import { PrismTokenise } from "../components/prismTokenise"
+import { theme } from "../theme"
 
 const seoUrl = require("../utilities/seo-url.js")
 
@@ -54,9 +57,68 @@ const renderMarkdown = new RehypeReact({
           }}
         />
       )
-    }
+    },
+    pre: (props) => {
+      const childProps = props.children[0].props
+      const code = childProps.children[0]
+      const language = childProps.className.split("-")[1]
+      const filename = childProps["data-meta"] || undefined
+      console.log(childProps)
+      return (
+        <PrismTokenise
+          code={code}
+          language={language}
+          filename={filename}
+          plugins={["line-numbers"]}
+        />
+      )
+    },
   },
 }).Compiler
+
+const Post = styled.article`
+
+  max-width: ${theme.content_md}px;
+  margin: 0 auto;
+  
+  header {
+    .details {
+      font-size: 0.9rem;
+      margin-top: 5px;
+    }
+  }
+  
+  .toc {
+    margin-top: 30px;
+    .title {
+      font-size: 0.9rem;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+  }
+  
+  .post-content {
+    margin-top: 30px;
+    margin-bottom: 60px;
+  }
+  
+  .recommend-articles {
+    padding-top: 52px;
+    padding-bottom: 60px;
+    .title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      line-height: 1;
+      margin-bottom: 15px;
+    }
+  }
+  
+  .disqus-comments {
+    padding-top: 60px;
+  }
+  
+`
 
 interface Props extends PageRendererProps {
   data: {
@@ -91,9 +153,6 @@ export default class BlogPostTemplate extends React.Component<Props> {
 
   componentDidMount() {
 
-    // HIGHLIGHT ALL CODE BLOCKS
-    Prism.highlightAll()
-
     // SCROLL TO HASH HEADING IN URL
     const { hash } = this.props.location
     if (hash) {
@@ -115,7 +174,7 @@ export default class BlogPostTemplate extends React.Component<Props> {
       title: post.frontmatter.title,
     }
     return (
-      <Layout>
+      <LayoutSideColumn sideColumnBottom={true}>
 
         <SEO
           title={post.frontmatter.title}
@@ -123,7 +182,7 @@ export default class BlogPostTemplate extends React.Component<Props> {
           <link rel="canonical" href={`https://pathof.dev/${post.frontmatter.path}`}/>
         </SEO>
 
-        <BlogPostWrapper>
+        <Post>
 
           <header>
             <h1 className="lhp">{post.frontmatter.title}</h1>
@@ -141,52 +200,50 @@ export default class BlogPostTemplate extends React.Component<Props> {
             </p>
           </header>
 
-          <div className="content">
-            {post.headings.length > 0 && (
-              <div className="toc">
-                <p className="title">Contents</p>
-                <LinksList
-                  links={(() => {
-                    return post.headings.map(({ value, depth }) => {
-                      const link = `#${seoUrl(value)}`
-                      return { depth, link, text: value, internal: false }
-                    })
-                  })()}
-                />
-              </div>
-            )}
-
-            <div className="post">
-              {renderMarkdown(post.htmlAst)}
-            </div>
-
-            <Divider/>
-
-            <section className="recommend-articles">
-              <p className="title">Latest Posts</p>
+          {post.headings.length > 0 && (
+            <div className="toc">
+              <p className="title">Contents</p>
               <LinksList
-                links={data.allMarkdownRemark.edges.filter(({node}) => node.frontmatter.preview !== "true").map(({node}) => ({
-                  text: node.frontmatter.title,
-                  link: node.frontmatter.path,
-                  depth: 1,
-                  internal: true,
-                }))}
+                links={(() => {
+                  return post.headings.map(({ value, depth }) => {
+                    const link = `#${seoUrl(value)}`
+                    return { depth, link, text: value, internal: false }
+                  })
+                })()}
               />
-            </section>
+            </div>
+          )}
 
-            <Divider/>
+          <MarkDownContent className="post-content">
+            {renderMarkdown(post.htmlAst)}
+          </MarkDownContent>
 
-            <section className="disqus-comments">
-              <Disqus.DiscussionEmbed
-                shortname={disqusShortname}
-                config={disqusConfig}
-              />
-            </section>
+          <Divider/>
+
+          <div className="recommend-articles">
+            <p className="title">Latest Posts</p>
+            <LinksList
+              links={data.allMarkdownRemark.edges.filter(({node}) => node.frontmatter.preview !== "true").map(({node}) => ({
+                text: node.frontmatter.title,
+                link: node.frontmatter.path,
+                depth: 1,
+                internal: true,
+              }))}
+            />
           </div>
 
-        </BlogPostWrapper>
+          <Divider/>
 
-      </Layout>
+          <div className="disqus-comments">
+            <Disqus.DiscussionEmbed
+              shortname={disqusShortname}
+              config={disqusConfig}
+            />
+          </div>
+
+        </Post>
+
+      </LayoutSideColumn>
     )
   }
 

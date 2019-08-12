@@ -1280,10 +1280,10 @@
   resolved "https://registry.yarnpkg.com/@nodelib/fs.stat/-/fs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@pathofdev/react-tag-input@1.0.3":
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/@pathofdev/react-tag-input/-/react-tag-input-1.0.3.tgz#8d36c8fa56c53f38fe7a29990e92a84d5375fa0f"
-  integrity sha512-rn2ox+B7JZyKPM3z6mSexpmb7pkTwxyPdhqdD0Jnvcz6uAvJy6nPGCs0ZZ7z9Whmn6Gn0yrK7/1etnq3EXPxJw==
+"@pathofdev/react-tag-input@1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@pathofdev/react-tag-input/-/react-tag-input-1.0.5.tgz#f45370ccde78333ea15f2cb49992653cd7240257"
+  integrity sha512-Eupqh81JhiBPaiR3z8RUmI5z3kYj8HqSDMcT2XliNf5M/TNXmBqmmrCOhmnZxu10saxupjAyl/4vQSL6DpeV8w==
 
 "@pieh/friendly-errors-webpack-plugin@1.7.0-chalk-2":
   version "1.7.0-chalk-2"

@@ -63,7 +63,6 @@ const renderMarkdown = new RehypeReact({
       const code = childProps.children[0]
       const language = childProps.className.split("-")[1]
       const filename = childProps["data-meta"] || undefined
-      console.log(childProps)
       return (
         <PrismTokenise
           code={code}

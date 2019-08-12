@@ -1,9 +1,9 @@
 import React from "react"
 import ReactTagInput, { ReactTagInputProps } from "@pathofdev/react-tag-input"
-import { Form } from "../../../components/form/form"
-import { Fieldset } from "../../../components/form/fieldset"
-import { Label } from "../../../components/form/label"
-import { Input } from "../../../components/form/input"
+import { Form } from "../form/form"
+import { Fieldset } from "../form/fieldset"
+import { Label } from "../form/label"
+import { Input } from "../form/input"
 
 const initialSettings: ReactTagInputProps = {
   tags: [],

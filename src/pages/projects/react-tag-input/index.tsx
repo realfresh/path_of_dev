@@ -117,8 +117,8 @@ export default (props: Props) => {
             </Box>
             <Box width={[ 1, 1/2 ]} p={2}>
               <div className="github_npm">
-                <a href="https://github.com/path-of-dev/react-tag-input" target="_blank"><FaGithub/> GitHub</a>
-                <a href="https://www.npmjs.com/package/@pathofdev/react-tag-input" target="_blank"><FaNpm/> NPM</a>
+                <a href="https://github.com/path-of-dev/react-tag-input"><FaGithub/> GitHub</a>
+                <a href="https://www.npmjs.com/package/@pathofdev/react-tag-input"><FaNpm/> NPM</a>
               </div>
             </Box>
           </Flex>

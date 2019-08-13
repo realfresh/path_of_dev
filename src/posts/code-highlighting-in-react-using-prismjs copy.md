@@ -1,5 +1,5 @@
 ---
-path: "/blog/initializing-react-state"
+path: "/blog/four-ways-to-initialize-react-state"
 date: "2019-08-13"
 title: "Four ways to initialize a React component's state"
 description: "See the different ways to initializing a React component's state and the differences between them"

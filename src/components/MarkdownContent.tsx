@@ -108,6 +108,12 @@ export const MarkDownContent = styled.div`
         line-height: 1.2rem;
       }
     }
+    
+    .divider {
+      margin: 30px 0 5px 0;
+      border-bottom: 1px solid ${theme.gray30};
+    }
+    
   }
   
 `

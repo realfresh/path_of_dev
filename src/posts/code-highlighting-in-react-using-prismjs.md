@@ -158,4 +158,26 @@ const Example = () => (
 )
 ```
 
+## Advanced usage of Prism.js in React
+
+There have been instances where I have had issues using Prism.js inside tabs or components that destroy and re-create parts of the DOM when their state changes.
+
+The most common issue I've noticed is React complaining that it was not able to remove certain DOM nodes as the Prism.js library modified the DOM causing React to lose track.
+
+If you are running into these issues, you will need to make use of the `Prism.tokenise` API. This function is what Prism.js uses under the hood to construct the HTML for the highlighted code section. You can find more info on this function at the bottom of [this page](https://prismjs.com/extending.html).
+
+Using this functionality, you can construct the highlighted code markup within a React component. This way, React can keep track of the DOM correctly and won't hit any errors.
+
+Thankfully, Formidable Labs created [prism-react-renderer](https://github.com/FormidableLabs/prism-react-renderer) which is a React component to help you do exactly this. Save yourself the trouble of re-implementing the `Prism.tokenise` API and use this component.
+
+There are a few potential issues when using this plugin that should be noted:
+
+- Cannot easily use existing Prism.js plugins
+- Cannot easily use existing Prism.js theme
+- Doesn't support all Prism.js languages, see [supported languages](https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js)
+
+If these issues are a problem for you, then it's best to implement your own component.
+
+<div class="divider"></div>
+
 That about sums it up for this tutorial. If you think there is anything important that can be added to this, let me know in the comments.

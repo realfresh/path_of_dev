@@ -68,6 +68,11 @@ export const MarkDownContent = styled.div`
       }
     }
     
+    blockquote {
+      color: #595959;
+      padding: 0 20px;
+    }
+    
     ul {
       padding: 0 0 0 25px;
       list-style: disc;

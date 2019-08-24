@@ -160,12 +160,15 @@ const LanguageBar = styled.div`
 
 export const PrismTokenise = (props: Props) => {
   const { code, filename, language } = props
+  const noLng = filename === "no-lng"
   return (
     <div>
-      <LanguageBar>
-        <span className="language">{language.toUpperCase()}</span>
-        {filename && <span>{filename}</span>}
-      </LanguageBar>
+      {!noLng && (
+        <LanguageBar>
+          <span className="language">{language.toUpperCase()}</span>
+          {(filename) && <span>{filename}</span>}
+        </LanguageBar>
+      )}
       <Highlight Prism={Prism as any} code={code.trim()} language={language as any} theme={prismTheme}>
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
           <pre className={className} style={style}>

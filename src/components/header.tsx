@@ -49,7 +49,14 @@ const HeaderComponent = styled.header`
   }
 `
 
-const baseTheme = localStorage.getItem("color-theme") ? localStorage.getItem("color-theme") : "light"
+function getTheme() {
+  if (typeof window === "undefined") {
+    return "light"
+  }
+  return localStorage.getItem("color-theme") ? localStorage.getItem("color-theme") : "light"
+}
+
+const baseTheme = getTheme()
 function switchTheme(type: string): void {
   if (type === "dark") {
     document.documentElement.setAttribute("data-theme", "dark")
@@ -63,8 +70,7 @@ function switchTheme(type: string): void {
 switchTheme(baseTheme || "light")
 
 export const Header = () => {
-  const currentTheme = localStorage.getItem("color-theme") ? localStorage.getItem("color-theme") : "light"
-  const [theme, setTheme] = React.useState(currentTheme)
+  const [theme, setTheme] = React.useState(getTheme())
   return (
     <HeaderComponent>
       <div className="content">

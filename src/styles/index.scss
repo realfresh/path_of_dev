@@ -1,38 +1,79 @@
 @import "_reset.scss";
 
-// VARIABLES
-$primary-color: #2FD023;
-$text-color: #292929;
+:root {
+  --primary: #2FD023;
+  --primary-faded: #e0f8de;
+  --primary-dark: #33cb25;
+  --text: #292929;
+  --text1: #2c2c2c;
+  --text2: #424242;
+  --text3: #565656;
+  --content-lg: 1100px;
+  --content-md: 680px;
+  --border: #dfdfdf;
+  --bg: white;
+  --bg1: #f9f9f9;
+  --bg2: #f6f6f6;
+  --bg3: #efefef;
+  --bg4: #e5e5e5;
+  --top-nav-bg: #292929;
+  --top-nav-text: white;
+  --top-nav-button-hover: #424242;
+  --big-heading-weight: 600;
+}
+
+[data-theme="dark"] {
+  --primary: #2FD023;
+  --primary-faded: rgba(47, 208, 35, 0.19);
+  --primary-dark: #26aa1d;
+  --text: white;
+  --text1: #eeeeee;
+  --text2: #bfbfbf;
+  --text3: #a6a6a6;
+  --content-lg: 1100px;
+  --content-md: 680px;
+  --border: #424242;
+  --bg: #171717;
+  --bg1: #242424;
+  --bg2: #333333;
+  --bg3: #404040;
+  --bg4: #484848;
+  --top-nav-bg: var(--bg1);
+  --top-nav-text: white;
+  --top-nav-button-hover: var(--bg3);
+  --big-heading-weight: 400;
+}
 
 // BASE
 html {
-  font-family: Helvetica Neue, Helvetica, Arial, serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 16px;
-  color: $text-color;
+  color: var(--text);
+  background: var(--bg);
 }
 
 // TYPOGRAPHY
 h1, h2, h3, h4 {
-  font-family: Helvetica Neue, Helvetica, Arial, serif;
-  font-weight: 600;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: var(--big-heading-weight);
 }
 h1 {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 h2 {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
 }
 h3 {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
 }
 h4 {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 p {
   line-height: 1.5rem;
 }
 a {
-  color: darken($primary-color, 3%);
+  color: var(--primary);
 }
 
 // FONT HELPERS

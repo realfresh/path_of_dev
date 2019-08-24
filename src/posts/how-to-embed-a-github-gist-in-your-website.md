@@ -3,6 +3,7 @@ path: "/blog/how-to-embed-a-github-gist-in-your-website"
 date: "2019-07-11"
 title: "How to embed a GitHub gist in your website"
 description: "Learn how to embed a GitHub gist into your web page to share code. This article also covers embedding a Github gist in React"
+icon: "github"
 ---
 
 GitHub gist’s are a great way to share code with others. It’s also probably one of the simplest ways you can embed your code into a website.

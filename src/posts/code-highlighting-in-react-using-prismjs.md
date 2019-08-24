@@ -3,6 +3,7 @@ path: "/blog/code-highlighting-in-react-using-prismjs"
 date: "2019-07-15"
 title: "Code highlighting in React using Prism.js"
 description: "This tutorial will show you how to use Prism.js together React JS to highlight your code. We will cover setting up Prism.js an creating a React component for it"
+image: "/images/technologies/prismjs.png"
 ---
 
 Prism.js is a fantastic code highlighting library. Probably the best I’ve seen and used. However, it has one serious problem. The documentation while simple feels very confusing at the same time. I can’t help but feel a bit lost every time I try to use it with React and enable a plugin, add a theme or support more languages.

@@ -1,13 +1,12 @@
 import React from "react"
 import styled from "styled-components"
 import { FaGithub } from "react-icons/fa"
-import { theme } from "../theme"
 
 const FooterComponent = styled.footer`
-  background: ${theme.gray10};
+  background: var(--bg1);
   padding: 20px;
   .content {
-    max-width: ${theme.content_lg}px;
+    max-width: var(--content-md);
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -20,7 +19,7 @@ const FooterComponent = styled.footer`
       display: flex;
       align-items: center;
       cursor: pointer;
-      color: ${theme.text};
+      color: var(--text);
       .icon { 
         font-size: 1.2rem;
         

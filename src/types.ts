@@ -13,3 +13,9 @@ declare module "*.mdx" {
   let MDXComponent: (props: any) => JSX.Element
   export default MDXComponent
 }
+
+interface DisqusConfig {
+  url: string
+  identifier: string
+  title: string
+}

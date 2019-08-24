@@ -1,6 +1,6 @@
 import React from "react"
 import styled from "styled-components"
-import {LayoutSideColumn} from "../components/LayoutSideColumn"
+import {LayoutSideColumn} from "../components/layouts/LayoutSideColumn"
 import {SEO} from "../components/seo"
 
 const Content = styled.div`

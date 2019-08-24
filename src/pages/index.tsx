@@ -1,12 +1,11 @@
 import React from "react"
 import styled from "styled-components"
-import Disqus from "disqus-react"
 import {graphql, Link, PageRendererProps} from "gatsby"
-import {theme} from "../theme"
-import {LayoutSideColumn} from "../components/LayoutSideColumn"
+import {LayoutSingleColumn} from "../components/layouts/LayoutSingleColumn"
 import {SEO} from "../components/seo"
-import {boxStyles} from "../components/box"
-import {Flex, Box} from "@rebass/grid"
+import {ListStyleA} from "../components/elements/ListStyleA"
+import {FaGithub} from "react-icons/fa"
+import {BlogPostsAll} from "../components/sections/posts"
 
 interface Props extends PageRendererProps {
   data: {
@@ -19,6 +18,8 @@ interface Props extends PageRendererProps {
             title: string
             description: string
             preview: string
+            image: string
+            icon: string
           }
           timeToRead: number
         }
@@ -27,103 +28,101 @@ interface Props extends PageRendererProps {
   }
 }
 
-const Page = styled.div`
-  max-width: ${theme.content_lg}px;
-  margin: 0 auto;
-`
-
-const Posts = styled.div`
-  margin-top: 15px;
-  .post {
-    ${boxStyles};
-    display: flex;
-    flex-direction: column;
-    padding: 25px 30px;
-    color: ${theme.text};
-    text-decoration: none;
-    height: 100%;
-    transition: 0.2s all;
-    > .title {
-      font-size: 1rem;
-      line-height: 1.4rem;
-      font-weight: 600;
-    }
-    > .details {
-      margin-top: 5px;
-      font-size: 0.85rem;
-    }
-    > .description {
-      margin-top: 5px;
-      font-size: 0.9rem;
-      line-height: 1.4rem;
-      flex-grow: 1;
-    }
-    > .bottom {
-      
-    }
-    &:hover {
-      box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
-    }
+const Heading = styled.section`
+  h1 {
+    font-size: 2rem;
+    line-height: 2.8rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  p {
+    font-size: 1.2rem;
+    line-height: 2rem;
   }
 `
 
-export default (props: Props) => (
-  <LayoutSideColumn>
+const ListSection = styled.section`
+  margin-top: 40px;
+  h2 {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 15px;
+    margin-bottom: 15px;
+  }
+`
 
-    <SEO
-      title="pathofdev: Simplifying web development"
-      description="The path of becoming a developer is hard. My goal is to simplify development with tutorials and open-source projects.">
-      <link rel="canonical" href="https://pathof.dev"/>
+const pageDetails = {
+  title: "pathofdev: Simplifying web development",
+  description: "The path of becoming a developer is hard. My goal is to simplify development with tutorials and open-source projects",
+  canonical: "https://pathof.dev",
+}
+
+const openSourceProjects = [
+  {
+    title: "Untrusive",
+    description: "Indeterminate loading bar for websites and web applications",
+    url: "https://github.com/pathofdev/Untrusive",
+    icon: <FaGithub/>,
+  },
+  {
+    title: "React Tag Input",
+    description: "Robust, minimal and performant input field for creating multiple tags",
+    link: "/projects/react-tag-input",
+    icon: <FaGithub/>,
+  }
+]
+
+export default (props: Props) => (
+  <LayoutSingleColumn>
+
+    <SEO title={pageDetails.title} description={pageDetails.description}>
+      <link rel="canonical" href={pageDetails.canonical}/>
     </SEO>
 
-    <h2 className="lhp">Latest Posts</h2>
+    <Heading>
+      <h1>Simplifying Web Development</h1>
+      <p>The path of modern web development is challenging. I hope to make it easier with helpful tutorials and open-source projects</p>
+    </Heading>
 
-    <Posts>
-      <Flex as="ul" flexWrap="wrap" alignItems="stretch" m={-2}>
-        {props.data.allMarkdownRemark.edges.map(({ node }, i) => node.frontmatter.preview === "true" ? null : (
-          <Box key={i} as="li" width={[1, 0.5]} p={2} flex="0 1 auto">
-            <Link className="post" to={node.frontmatter.path}>
-              <h3 className="title">{node.frontmatter.title}</h3>
-              <p className="details">
-                {node.frontmatter.date}
-                {` - `}
-                <Disqus.CommentCount
-                  shortname={"path_of_dev"}
-                  config={{
-                    url: `https://pathof.dev/${node.frontmatter.path}`,
-                    identifier: node.frontmatter.path,
-                    title: node.frontmatter.title,
-                  }}>
-                  0 Comments
-                </Disqus.CommentCount>
-                {` - `}
-                {Math.round(node.timeToRead * 1.4)} min read
-              </p>
-              <p className="description">{node.frontmatter.description}</p>
+    <ListSection>
+      <h2 className="lhp">Open-source projects</h2>
+      <ListStyleA>
+        {openSourceProjects.map((item, i) => {
+          const content = (
+            <>
+              <div className="image">
+                {item.icon}
+              </div>
+              <div className="content">
+                <h3 className="title">{item.title}</h3>
+                <p className="details">{item.description}</p>
+              </div>
+            </>
+          )
+          return item.link ? (
+            <Link key={i} to={item.link} className="item">
+              {content}
             </Link>
-          </Box>
-        ))}
-      </Flex>
-    </Posts>
+          ) : (
+            <a key={i} href={item.url} className="item">
+              {content}
+            </a>
+          )
+        })}
+      </ListStyleA>
+    </ListSection>
 
-  </LayoutSideColumn>
+    <ListSection>
+      <h2 className="lhp">Articles</h2>
+      <BlogPostsAll/>
+    </ListSection>
+
+  </LayoutSingleColumn>
 )
 
 export const query = graphql`
-  query PageQuery {
-      allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 1000 ) {
-          edges {
-              node {
-                  frontmatter {
-                      date(formatString: "MMMM DD, YYYY")
-                      path
-                      title
-                      description
-                      preview
-                  }
-                  timeToRead
-              }
-          }
-      }
-  }
+    query {
+        allMarkdownRemark(sort: { order: DESC, fields: [frontmatter___date] }, limit: 55 ) {
+            ...PostQueryFragment
+        }
+    }
 `

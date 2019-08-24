@@ -3,6 +3,7 @@ path: "/blog/build-react-router-alternative"
 date: "2019-08-06"
 title: "Build your own React router alternative"
 description: "Building your own router for React is easily accomplished. It's a great alternative to using an existing React routing package. See how and why in this article."
+image: "/images/technologies/react.png"
 ---
 
 Before building a router for React, let's clear something up.

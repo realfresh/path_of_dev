@@ -1,5 +1,4 @@
 import styled from "styled-components"
-import { theme } from "../theme"
 
 export const MarkDownContent = styled.div`
   
@@ -17,10 +16,11 @@ export const MarkDownContent = styled.div`
     
     h2, h3, h4 {
       line-height: 1.3;
-      border-left: 3px solid ${theme.primary};
-      background: ${theme.gray10};
+      border-left: 3px solid var(--primary);
+      background: var(--bg1);
+      margin: 0 -20px;
       a {
-        color: ${theme.text};
+        color: var(--text);
         text-decoration: none;
       }
     }
@@ -28,12 +28,13 @@ export const MarkDownContent = styled.div`
     h2 {
       margin-top: 50px;
       margin-bottom: 10px;
-      padding: 16px 16px;
+      padding: 16px 20px;
+      border-left: 6px solid var(--primary);
     }
     
     h3, h4 {
       margin-top: 40px;
-      padding: 12px 16px;
+      padding: 12px 20px;
     }
     
     p {
@@ -44,7 +45,7 @@ export const MarkDownContent = styled.div`
     p, li {
       font-size: 1rem;
       > code {
-        background: rgba(47,208,35,0.15);
+        background: var(--primary-faded);
         padding: 3px 5px;
         font-size: 0.85rem;
       }
@@ -99,15 +100,15 @@ export const MarkDownContent = styled.div`
       border-spacing: 0;
       border-collapse: collapse;
       tr {
-        border-top: 1px solid #ccc;
-        background-color: #fff;
+        border-top: 1px solid var(--border);
+        background-color: var(--bg);
         text-align: left;
       }
       tr:nth-child(2n) {
-        background-color: #f8f8f8;
+        background-color: var(--bg1);
       }
       th, td {
-        border: 1px solid #ddd;
+        border: 1px solid var(--border);
         padding: 8px 13px;
         font-size: 0.9rem;
         line-height: 1.2rem;
@@ -116,7 +117,7 @@ export const MarkDownContent = styled.div`
     
     .divider {
       margin: 30px 0 5px 0;
-      border-bottom: 1px solid ${theme.gray30};
+      border-bottom: 1px solid var(--bg3);
     }
     
   }

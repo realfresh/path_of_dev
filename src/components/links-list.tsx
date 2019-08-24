@@ -1,35 +1,43 @@
 import React from "react"
 import styled from "styled-components"
-import { theme } from "../theme"
 import { Link } from "gatsby"
-import { boxStyles } from "./box"
+import { FaChevronRight } from "react-icons/fa"
+
+export interface LinkListItem {
+  depth: number
+  text: string
+  link: string
+  internal: boolean
+}
 
 interface Props {
   className?: string
-  links: Array<{ depth: number, text: string, link: string, internal: boolean }>
+  links: LinkListItem[]
 }
 
 const Wrapper = styled.nav`
-  ${boxStyles};
+  border-radius: 5px;
+  background: var(--bg2);
   padding: 20px 25px;
-  .title {
-    margin-bottom: 10px;
-    font-weight: 600;
-    font-size: 1rem;
-    line-height: 1;
-  }
+  margin: 0 -10px;
   ul {
-    padding: 0 15px;
-    list-style: disc;
+    padding: 0;
+    list-style: none;
   }
   li {
     cursor: pointer;
-    margin-bottom: 8px;   
+    margin-bottom: 10px;   
     a {
       text-decoration: none;
-      color: ${theme.text};
+      color: var(--text);
       font-size: 0.95rem;
       line-height: 1.4;
+      display: flex;
+      align-items: center;
+    }
+    svg {
+      margin-right: 10px;
+      color: var(--text3)
     }
     &:last-child { 
       margin-bottom: 0 
@@ -38,14 +46,13 @@ const Wrapper = styled.nav`
       margin-left: 0;
     }
     &.depth-3 { 
-      margin-left: 10px; 
-      list-style: circle;
+      margin-left: 15px;
       a {
         text-decoration: none;
         font-size: 0.9rem; 
       }
     }
-    &.depth-4 { margin-left: 20px; }
+    &.depth-4 { margin-left: 30px; }
   }
 `
 
@@ -61,8 +68,8 @@ export class LinksList extends React.Component<Props> {
           {links.map(({ depth, text, internal, link }, i) => {
             return (
               <li key={i} className={`depth-${depth}`}>
-                {internal && <Link to={link}>{text}</Link>}
-                {!internal && <a href={link}>{text}</a>}
+                {internal && <Link to={link}><FaChevronRight/> {text}</Link>}
+                {!internal && <a href={link}><FaChevronRight/> {text}</a>}
               </li>
             )
           })}

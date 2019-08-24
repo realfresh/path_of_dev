@@ -3,6 +3,7 @@ path: "/blog/creating-anchor-links"
 date: "2019-07-14"
 title: "Creating anchor links"
 description: "Anchor links are used to link directly to a particular section within a webpage. A great feature to have as it makes sharing content far easier"
+image: "/images/technologies/javascript.png"
 ---
 
 An anchor link is a type of link that points to a particular section within a web page. When a web page loads, if the URL contains an anchor link, the browser will automatically scroll to the anchored point.

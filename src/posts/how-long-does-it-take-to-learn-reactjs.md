@@ -3,6 +3,7 @@ path: "/blog/how-long-does-it-take-to-learn-react"
 date: "2019-08-02"
 title: "How long does it take to learn React?"
 description: "React is a fantastic UI library with a strange learning curve. See how long it takes to learn React as we take you through our learning timeline. "
+image: "/images/technologies/react.png"
 ---
 
 [React](https://reactjs.org/) is one of the fastest growing development libraries in the world for good reasons. If you are interested in learning React, you might be asking yourself, how long does it take to learn React?.

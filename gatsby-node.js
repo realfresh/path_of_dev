@@ -19,7 +19,7 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `)
 
-  const template = path.resolve("src/templates/blog-post.tsx")
+  const template = path.resolve("src/templates/article/index.tsx")
 
   pages.data.allMarkdownRemark.edges.forEach(({ node }) => {
     if (node.frontmatter.preview !== "true") {

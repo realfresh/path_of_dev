@@ -3,6 +3,7 @@ path: "/blog/making-sense-of-git-and-github"
 date: "2019-07-26"
 title: "Making sense of Git and GitHub"
 description: "It's time to dissolve the confusion and learn how to use Git and GitHub. Argubly one of the most important tools in a developers repertoire"
+icon: "github"
 ---
 
 I remember when I first started my development journey. Git and GitHub confused the heck out of me.

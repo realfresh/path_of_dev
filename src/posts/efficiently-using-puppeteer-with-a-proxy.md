@@ -3,6 +3,7 @@ path: "/blog/efficiently-using-puppeteer-with-a-proxy"
 date: "2019-07-11"
 title: "How to efficiently use puppeteer with a proxy"
 description: "Using puppeteer with many proxy servers can be difficult. See how you can efficiently to use puppeteer with one or more proxy connections in an efficient manner"
+image: "/images/technologies/puppeteer.png"
 ---
 
 Puppeteer is a fantastic tool created by the folk at Google. It allows us to programmatically use the Chromium browser for tasks such a web scraping, taking screenshots, UI testing and much more.

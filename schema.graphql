@@ -488,6 +488,8 @@ type MarkdownRemarkFrontmatter {
         locale: String
     ): Date
     description: String
+    icon: String
+    image: String
     path: String
     preview: String
     title: String
@@ -963,6 +965,8 @@ enum FileFieldsEnum {
     childMarkdownRemark___fileAbsolutePath
     childMarkdownRemark___frontmatter___date
     childMarkdownRemark___frontmatter___description
+    childMarkdownRemark___frontmatter___icon
+    childMarkdownRemark___frontmatter___image
     childMarkdownRemark___frontmatter___path
     childMarkdownRemark___frontmatter___preview
     childMarkdownRemark___frontmatter___title
@@ -1340,6 +1344,8 @@ enum MarkdownRemarkFieldsEnum {
     fileAbsolutePath
     frontmatter___date
     frontmatter___description
+    frontmatter___icon
+    frontmatter___image
     frontmatter___path
     frontmatter___preview
     frontmatter___title
@@ -2098,6 +2104,8 @@ input MarkdownRemarkFilterInput {
 input MarkdownRemarkFrontmatterFilterInput {
     date: DateQueryOperatorInput
     description: StringQueryOperatorInput
+    icon: StringQueryOperatorInput
+    image: StringQueryOperatorInput
     path: StringQueryOperatorInput
     preview: StringQueryOperatorInput
     title: StringQueryOperatorInput

@@ -3,6 +3,7 @@ path: "/blog/how-long-does-it-take-to-learn-nodejs"
 date: "2019-07-08"
 title: "How long does it take to learn Node.js?"
 description: "See how long it takes to learn Node.js whether you are just starting your programming journey or you are seasoned veteran "
+image: "/images/technologies/node.png"
 ---
 
 First, let’s define what I mean by learn Node.js. When I say learn in this context, I’m referring to a level of competence where you can research, code, and understand any application with a low-to-moderate complexity. For example, building an API server that converts currencies.

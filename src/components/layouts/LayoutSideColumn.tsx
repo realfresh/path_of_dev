@@ -1,11 +1,11 @@
 import React from "react"
 import styled from "styled-components"
 import { Link } from "gatsby"
-import { Header } from "./header"
-import { Footer } from "./footer"
-import { theme } from "../theme"
-import { SideColumn } from "./SideColumn"
-import { MDXProvider } from "./MdxProvider"
+import { Header } from "../header"
+import { Footer } from "../footer"
+import { theme } from "../../theme"
+import { SideColumn } from "../SideColumn"
+import { MDXProvider } from "../MdxProvider"
 
 interface Props {
   children: React.ReactNode

@@ -3,6 +3,7 @@ path: "/blog/block-requests-from-loading-in-puppeteer"
 date: "2019-07-14"
 title: "Block specific requests from loading in Puppeteer"
 description: "Learn how to block requests from loading within the headless Chrome package, Puppeteer. Useful for reducing bandwidth usage or preventing things from loading"
+image: "/images/technologies/puppeteer.png"
 ---
 
 Blocking requests in puppeteer is extremely simple. The API allows us to intercept all network requests on a particular puppeteer page.

@@ -3,6 +3,7 @@ path: "/blog/timelapse-of-creating-this-blog-using-gatsbyjs-and-prismic"
 date: "2019-07-13"
 title: "Timelapse of creating pathof.dev blog using Gatsby.js & Prismic"
 description: "Want to see how this blog was created? I recorded the entire process uncut, from start to finish. The entire blog is a static site created using Gatbsy.js and Prismic CMS"
+image: "/images/technologies/gatsby.png"
 ---
 
 To be completely honest, not sure why I did this. Just thought it would be cool to create a programming timelapse. As such, when creating this website, I recorded my process from start to finish.

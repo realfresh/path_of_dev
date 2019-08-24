@@ -1,8 +1,9 @@
 ---
 path: "/blog/lerna-typescript-monorepo"
 date: "2019-08-23"
-title: "Lerna monorepo with TypeScript incremental builds - Tutorial"
+title: "Lerna monorepo with TypeScript incremental builds"
 description: "See how to set up a monorepo using Lerna and TypeScript with incremental compilation to maximize build performance"
+image: "/images/technologies/typescript.png"
 ---
 
 Looking to build a modular application using TypeScript in an easy to manage format? This article has got you covered.

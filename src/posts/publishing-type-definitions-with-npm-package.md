@@ -3,6 +3,7 @@ path: "/blog/publishing-type-definitions-with-npm-package"
 date: "2019-07-31"
 title: "Publishing TypeScript definitions with an NPM package"
 description: "Already built your TypeScript package and ready to publish to NPM? Now see how to include your TypeScript type definitions with your package and avoid a major pitfall"
+image: "/images/technologies/typescript.png"
 ---
 
 Publishing your TypeScript module to NPM is relatively straight forward. When we do this, it's best to include our type definitions directly in our package.

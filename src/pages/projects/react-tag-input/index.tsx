@@ -3,7 +3,7 @@ import styled from "styled-components"
 import {PageRendererProps} from "gatsby"
 import {theme} from "../../../theme"
 import {SEO} from "../../../components/seo"
-import {LayoutSideColumn} from "../../../components/LayoutSideColumn"
+import {LayoutSingleColumn} from "../../../components/layouts/LayoutSingleColumn"
 import {MarkDownContent} from "../../../components/MarkdownContent"
 import {ReactTagInputDemo} from "../../../components/demos/ReactTagInput"
 import {FaGithub, FaNpm} from "react-icons/fa"
@@ -31,9 +31,6 @@ interface Props extends PageRendererProps {
 }
 
 const Page = styled.article`
-
-  max-width: ${theme.content_md}px;
-  margin: 0 auto;
   
   header {
     h1 {
@@ -100,7 +97,7 @@ export default (props: Props) => {
     title: "React Tag Input",
   }
   return (
-    <LayoutSideColumn sideColumnBottom={true}>
+    <LayoutSingleColumn>
 
       <SEO
         title="React Tag Input - Component"
@@ -162,6 +159,6 @@ export default (props: Props) => {
 
       </Page>
 
-    </LayoutSideColumn>
+    </LayoutSingleColumn>
   )
 }

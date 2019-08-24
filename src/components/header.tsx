@@ -58,13 +58,15 @@ function getTheme() {
 
 const baseTheme = getTheme()
 function switchTheme(type: string): void {
-  if (type === "dark") {
-    document.documentElement.setAttribute("data-theme", "dark")
-    localStorage.setItem("color-theme", "dark")
-  }
-  else {
-    document.documentElement.setAttribute("data-theme", "light")
-    localStorage.setItem("color-theme", "light")
+  if (typeof window !== "undefined") {
+    if (type === "dark") {
+      document.documentElement.setAttribute("data-theme", "dark")
+      localStorage.setItem("color-theme", "dark")
+    }
+    else {
+      document.documentElement.setAttribute("data-theme", "light")
+      localStorage.setItem("color-theme", "light")
+    }
   }
 }
 switchTheme(baseTheme || "light")

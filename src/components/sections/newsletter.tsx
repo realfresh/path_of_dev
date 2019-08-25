@@ -41,7 +41,7 @@ function subscribe(email: string, success: () => void) {
   untrusive.start()
   email = encodeURIComponent(email)
   const url = `/subscribe-newsletter?email=${email}`
-  const base = process.env.NODE_ENV === "production" ? "https://pathof.dev" : "http://localhost:9000"
+  const base = process.env.NODE_ENV === "production" ? "https://pathof.dev/.netlify/functions" : "http://localhost:9000"
   fetch(base + url)
     .then((res) => {
       untrusive.stop()

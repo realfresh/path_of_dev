@@ -1,15 +1,15 @@
 import styled from "styled-components"
 import { theme } from "../../theme"
 
-export const Input = styled.input`
+export const Button = styled.button`
   outline: 0;
   font-size: 1rem;
-  line-height: normal;
+  font-weight: bold;
   height: 42px;
-  color: var(--input-text);
-  background: var(--input-bg);
-  border: 1px solid var(--border);
+  color: white;
+  background: var(--primary-dark);
+  border: 1px solid var(--primary-dark);
   border-radius: 3px;
   padding: 0.3rem 0.8rem;
-  width: 100%;
+  cursor: pointer;
 `

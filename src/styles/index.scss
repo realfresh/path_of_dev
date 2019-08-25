@@ -20,6 +20,8 @@
   --top-nav-text: white;
   --top-nav-button-hover: #424242;
   --big-heading-weight: 600;
+  --input-bg: white;
+  --input-text: var(--text);
 }
 
 [data-theme="dark"] {
@@ -42,6 +44,8 @@
   --top-nav-text: white;
   --top-nav-button-hover: var(--bg3);
   --big-heading-weight: 400;
+  --input-bg: white;
+  --input-text: #333;
 }
 
 // BASE

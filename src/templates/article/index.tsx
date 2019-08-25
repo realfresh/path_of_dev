@@ -10,6 +10,7 @@ import {LayoutSingleColumn} from "../../components/layouts/LayoutSingleColumn"
 import seoUrl from "../../utilities/seo-url.js"
 import Header from "./header"
 import List from "./list"
+import { Newsletter } from "../../components/sections/newsletter"
 
 const Post = styled.article`
 
@@ -26,8 +27,13 @@ const Post = styled.article`
   }
   
   .recommend-articles {
-    padding-top: 52px;
-    padding-bottom: 60px;
+    margin-top: 52px;
+  }
+  
+  .newsletter-box {
+    margin: 0 -10px;
+    margin-top: 30px;
+    margin-bottom: 60px;
   }
   
   .disqus-comments {
@@ -129,6 +135,8 @@ export default class BlogPostTemplate extends React.Component<Props> {
               internal: true,
             }))}
           />
+
+          <Newsletter/>
 
           <Divider/>
 

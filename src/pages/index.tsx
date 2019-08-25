@@ -6,6 +6,7 @@ import {SEO} from "../components/seo"
 import {ListStyleA} from "../components/elements/ListStyleA"
 import {FaGithub} from "react-icons/fa"
 import {BlogPostsAll} from "../components/sections/posts"
+import {Newsletter} from "../components/sections/newsletter"
 
 interface Props extends PageRendererProps {
   data: {
@@ -114,6 +115,10 @@ export default (props: Props) => (
     <ListSection>
       <h2 className="lhp">Articles</h2>
       <BlogPostsAll/>
+    </ListSection>
+
+    <ListSection>
+      <Newsletter/>
     </ListSection>
 
   </LayoutSingleColumn>

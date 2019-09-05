@@ -23,7 +23,10 @@ exports.handler = function(event, context, callback) {
     };
     axios(data)
       .then(() => callback(null, { statusCode: 200, body: "success", headers: responseHeaders }))
-      .catch(() => callback(null, { statusCode: 500, body: "error", headers: responseHeaders }))
+      .catch((e) => {
+        console.log(e);
+        callback(null, { statusCode: 500, body: "error", headers: responseHeaders });
+      })
   }
 
 }

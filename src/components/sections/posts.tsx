@@ -2,7 +2,7 @@ import React from "react"
 import Disqus from "disqus-react"
 import { graphql, Link, PageRendererProps, useStaticQuery } from "gatsby"
 import { ListStyleA } from "../elements/ListStyleA"
-import { FaGithub } from "react-icons/fa"
+import { FaGithub, FaNpm } from "react-icons/fa"
 
 interface Data {
   allMarkdownRemark: {

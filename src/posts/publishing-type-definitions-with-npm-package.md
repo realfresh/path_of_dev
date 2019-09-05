@@ -151,7 +151,7 @@ One last thing we might want to do is to explicitly export all the type definiti
 Going off the above file examples, we could modify our `index.ts` file to look like this:
 
 ```ts
-import * as Types* from "./types";
+import * as Types from "./types";
 
 export function log(opts: Types.Options): void {
   console.log(opts.message);

@@ -5,8 +5,8 @@ import {Button} from "../elements/buttom"
 import Untrusive from "untrusive"
 
 const untrusive = new Untrusive({
-  bgColor: "#a9f89d",
-  barColor: "#33cb25"
+  bgColor: "#9aa6e1",
+  barColor: "#2533e1"
 })
 
 const Wrapper = styled.div`
@@ -64,7 +64,7 @@ export const Newsletter = ({}: {}) => {
   return (
     <Wrapper className="newsletter-box">
       <h3>Subscribe for updates</h3>
-      <p>No spam, just high quality content. Receive an e-mail whenever I release a new article or project. </p>
+      <p>No spam, just high quality content. Receive an e-mail whenever I release a new article or project</p>
       <form onSubmit={(e) => {
         e.preventDefault()
         subscribe(email, () => setEmail(""))

@@ -10,17 +10,17 @@ export const renderMarkdown = new RehypeReact({
     h2: ({ children }) => {
       const title = children[0]
       const id = `${seoUrl(title)}`
-      return <h2 id={id}><a href={`#${id}`}>{title}</a></h2>
+      return <h2><a href={`#${id}`}>{title}</a><a id={id} className="anchor"/></h2>
     },
     h3: ({ children }) => {
       const title = children[0]
       const id = `${seoUrl(title)}`
-      return <h3 id={id}><a href={`#${id}`}>{title}</a></h3>
+      return <h3><a href={`#${id}`}>{title}</a><a id={id} className="anchor"/></h3>
     },
     h4: ({ children }) => {
       const title = children[0]
       const id = `${seoUrl(title)}`
-      return <h4 id={id}><a href={`#${id}`}>{title}</a></h4>
+      return <h4><a href={`#${id}`}>{title}</a><a id={id} className="anchor"/></h4>
     },
     youtube: ({ children }) => {
       return (

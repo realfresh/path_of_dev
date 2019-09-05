@@ -79,6 +79,7 @@ export default class BlogPostTemplate extends React.Component<Props> {
       const el = document.querySelector(hash)
       if (el && el.scrollIntoView) {
         el.scrollIntoView()
+        document.body.scrollTop += 50
       }
     }
   }

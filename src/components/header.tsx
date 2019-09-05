@@ -43,14 +43,14 @@ const HeaderComponent = styled.header`
       font-size: 1.2rem;
       font-weight: 600;
       .highlight {
-        color: var(--primary);
+        color: #3846ea;
       }
     }
   }
 `
 
 function getTheme() {
-  if (typeof window === "undefined") {
+  if (typeof window === "undefined" || !localStorage) {
     return "light"
   }
   return localStorage.getItem("color-theme") ? localStorage.getItem("color-theme") : "light"
@@ -61,11 +61,15 @@ function switchTheme(type: string): void {
   if (typeof window !== "undefined") {
     if (type === "dark") {
       document.documentElement.setAttribute("data-theme", "dark")
-      localStorage.setItem("color-theme", "dark")
+      if (localStorage) {
+        localStorage.setItem("color-theme", "dark")
+      }
     }
     else {
       document.documentElement.setAttribute("data-theme", "light")
-      localStorage.setItem("color-theme", "light")
+      if (localStorage) {
+        localStorage.setItem("color-theme", "light")
+      }
     }
   }
 }

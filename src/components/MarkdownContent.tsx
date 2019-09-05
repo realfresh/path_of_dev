@@ -23,6 +23,12 @@ export const MarkDownContent = styled.div`
         color: var(--text);
         text-decoration: none;
       }
+      .anchor {
+        display: block;
+        position: relative;
+        top: -125px;
+        visibility: hidden;
+      }
     }
     
     h2 {
@@ -70,7 +76,7 @@ export const MarkDownContent = styled.div`
     }
     
     blockquote {
-      color: #595959;
+      color: var(--text3);
       padding: 0 20px;
     }
     
